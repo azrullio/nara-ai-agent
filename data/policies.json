@@ -1,0 +1,20 @@
+{
+  "batas_otomatis_ai": {
+    "refund_maks": 100000,
+    "voucher_maks": 25000,
+    "penggantian_order_fiktif_maks": 300000,
+    "keterangan": "Di atas batas ini AI wajib eskalasi ke agen manusia (tetap buat tiket & jelaskan ke pengguna)."
+  },
+  "kompensasi_keterlambatan_food": [
+    { "telat_lebih_dari_menit": 15, "voucher": 10000 },
+    { "telat_lebih_dari_menit": 30, "voucher": 15000, "boleh_batal_refund_penuh": true }
+  ],
+  "voucher_permintaan_maaf": { "driver_tidak_sopan": 15000, "item_kurang": 5000, "makanan_rusak": 10000, "driver_minta_tambahan": 10000, "gangguan_sistem": 10000 },
+  "prioritas": {
+    "P1": "Keselamatan / keamanan dana - respon < 5 menit, wajib eskalasi manusia",
+    "P2": "Kerugian finansial - selesai < 1x24 jam",
+    "P3": "Kualitas layanan - selesai < 2x24 jam",
+    "P4": "Informasi umum"
+  },
+  "nomor_darurat": { "polisi_darurat": "112", "ambulans": "119", "unit_safety_internal": "Tombol darurat (SOS) di aplikasi / Unit Safety 24 jam" }
+}

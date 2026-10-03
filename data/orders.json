@@ -1,0 +1,58 @@
+[
+  {
+    "id": "GF-88213", "user_id": "U001", "layanan": "GoFood", "merchant_id": "MER-01", "driver_id": "DRV-103",
+    "item": [ { "nama": "Bakso Urat Jumbo", "qty": 2, "harga": 28000 }, { "nama": "Es Jeruk", "qty": 1, "harga": 8000 } ],
+    "ongkir": 4000, "total": 68000, "metode_bayar": "GoPay",
+    "dibuat_menit_lalu": 52, "estimasi_siap_menit": 15, "driver_tiba_di_resto_menit_lalu": 34,
+    "status": "MENUNGGU_RESTO",
+    "alamat_tujuan": "Jl. Tebet Barat Dalam 4 No. 12"
+  },
+  {
+    "id": "GR-55102", "user_id": "U001", "layanan": "GoRide", "driver_id": "DRV-101",
+    "rute": "Stasiun Tebet -> Kantor Kuningan", "tarif_estimasi": 18000, "tarif_final": 18000, "metode_bayar": "GoPay",
+    "dibuat_menit_lalu": 1460, "selesai_menit_lalu": 1435, "status": "SELESAI", "rating_diberikan": null
+  },
+  {
+    "id": "GF-77120", "user_id": "U004", "layanan": "GoFood", "merchant_id": "MER-02", "driver_id": "DRV-106",
+    "item": [ { "nama": "Paket Geprek Level 3", "qty": 2, "harga": 23000 }, { "nama": "Es Teh Manis Jumbo", "qty": 1, "harga": 7000 }, { "nama": "Tahu Crispy", "qty": 1, "harga": 5000 } ],
+    "ongkir": 3000, "total": 61000, "metode_bayar": "GoPay",
+    "dibuat_menit_lalu": 55, "selesai_menit_lalu": 18, "status": "SELESAI",
+    "catatan_driver": "Pesanan diserahkan sesuai yang diberikan resto (kantong tersegel)"
+  },
+  {
+    "id": "GC-33019", "user_id": "U004", "layanan": "GoCar", "driver_id": "DRV-107",
+    "rute": "Margonda Depok -> Blok M", "tarif_estimasi": 42000, "tarif_final": 58000, "metode_bayar": "GoPay",
+    "rincian_tarif": { "tarif_dasar": 42000, "biaya_tunggu": 4000, "perubahan_rute": 12000 },
+    "log_sistem": "Perubahan rute diinput oleh DRIVER, bukan pelanggan. Tidak ada persetujuan pelanggan di aplikasi.",
+    "barang_tertinggal_laporan_driver": "Ditemukan dompet cokelat & payung di jok belakang",
+    "dibuat_menit_lalu": 190, "selesai_menit_lalu": 120, "status": "SELESAI"
+  },
+  {
+    "id": "GS-90451", "user_id": "U003", "layanan": "GoSend", "driver_id": "DRV-104",
+    "barang": "HP Samsung Galaxy A35 (dus tersegel)", "nilai_barang_dideklarasikan": 3200000, "asuransi_aktif": true, "batas_asuransi": 10000000,
+    "rute": "Dago, Bandung -> Antapani, Bandung", "penerima": "Dewi (adik)",
+    "dibuat_menit_lalu": 300, "selesai_menit_lalu": 240, "status": "SELESAI",
+    "bukti_serah_terima": "Foto pagar rumah, tanpa penerima. Titik GPS 'selesai' berjarak 1,8 km dari alamat tujuan.",
+    "flag_sistem": ["GPS_SELESAI_JAUH_DARI_TUJUAN", "FOTO_TANPA_PENERIMA", "DRIVER_ADA_2_LAPORAN_SERUPA"]
+  },
+  {
+    "id": "GC-33088", "user_id": "U005", "layanan": "GoCar", "driver_id": "DRV-102",
+    "rute": "Grand Indonesia -> Kebon Jeruk", "tarif_estimasi": 61000, "tarif_final": 61000, "metode_bayar": "GoPay",
+    "dibuat_menit_lalu": 95, "selesai_menit_lalu": 40, "status": "SELESAI",
+    "log_perjalanan": "Kendaraan berhenti 11 menit di Jl. Panjang (bukan titik tujuan). Pintu terkunci dari dalam terdeteksi via telematik."
+  },
+  {
+    "id": "GF-66001", "user_id": "U999", "layanan": "GoFood", "merchant_id": "MER-04", "driver_id": "DRV-105",
+    "item": [ { "nama": "Martabak Telor Spesial 4 Telur", "qty": 3, "harga": 55000 }, { "nama": "Martabak Manis Keju Cokelat", "qty": 2, "harga": 40000 } ],
+    "ongkir": 0, "total": 245000, "metode_bayar": "Tunai (ditalangi driver)",
+    "dibuat_menit_lalu": 80, "status": "DIBATALKAN_SISTEM",
+    "pemesan": { "akun_dibuat_menit_lalu": 95, "nama": "Andi", "telepon_aktif": false, "alamat_valid": false, "riwayat_order": 0 },
+    "flag_sistem": ["AKUN_BARU_KURANG_2_JAM", "ALAMAT_TIDAK_DITEMUKAN", "PEMESAN_TIDAK_BISA_DIHUBUNGI", "NILAI_ORDER_TINGGI_TUNAI"],
+    "driver_talangan": 245000
+  },
+  {
+    "id": "GR-55210", "user_id": "U002", "layanan": "GoRide", "driver_id": "DRV-101",
+    "rute": "Summarecon Bekasi -> Stasiun Bekasi", "tarif_estimasi": 14000, "tarif_final": 14000, "metode_bayar": "GoPay",
+    "dibuat_menit_lalu": 400, "selesai_menit_lalu": 380, "status": "SELESAI"
+  }
+]

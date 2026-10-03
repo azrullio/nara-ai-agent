@@ -1,0 +1,9 @@
+[
+  { "id": "DRV-101", "nama": "Joko Susilo", "layanan": "GoRide", "kendaraan": "Honda Beat hitam", "plat": "B 3456 KJT", "rating": 4.6, "jumlah_keluhan_90hari": 3, "status": "AKTIF", "telepon_masking": "0812-xxxx-1101" },
+  { "id": "DRV-102", "nama": "Hendra Wijaya", "layanan": "GoCar", "kendaraan": "Toyota Avanza silver", "plat": "B 1290 PQR", "rating": 4.2, "jumlah_keluhan_90hari": 2, "status": "AKTIF", "telepon_masking": "0812-xxxx-1102" },
+  { "id": "DRV-103", "nama": "Wawan Hermawan", "layanan": "GoFood", "kendaraan": "Yamaha NMAX biru", "plat": "B 4521 TBT", "rating": 4.9, "jumlah_keluhan_90hari": 0, "status": "AKTIF", "telepon_masking": "0812-xxxx-1103" },
+  { "id": "DRV-104", "nama": "Rudi Hartono", "layanan": "GoSend", "kendaraan": "Honda Vario putih", "plat": "D 6672 ABK", "rating": 4.4, "jumlah_keluhan_90hari": 4, "status": "AKTIF", "telepon_masking": "0812-xxxx-1104", "catatan_internal": "2 laporan paket tidak sampai dalam 30 hari terakhir" },
+  { "id": "DRV-105", "nama": "Agus Setiawan", "layanan": "GoFood", "kendaraan": "Honda Supra X merah", "plat": "B 3011 JTM", "rating": 4.9, "jumlah_keluhan_90hari": 0, "status": "AKTIF", "telepon_masking": "0812-xxxx-1105" },
+  { "id": "DRV-106", "nama": "Fajar Nugroho", "layanan": "GoFood", "kendaraan": "Honda Scoopy krem", "plat": "B 5590 DPK", "rating": 4.8, "jumlah_keluhan_90hari": 0, "status": "AKTIF", "telepon_masking": "0812-xxxx-1106" },
+  { "id": "DRV-107", "nama": "Slamet Riyadi", "layanan": "GoCar", "kendaraan": "Honda Brio merah", "plat": "B 2207 DPK", "rating": 4.7, "jumlah_keluhan_90hari": 1, "status": "AKTIF", "telepon_masking": "0812-xxxx-1107" }
+]

@@ -1,0 +1,162 @@
+[
+  {
+    "id": "TOPUP_TIDAK_MASUK", "kategori": "Keuangan", "nama": "Saldo top up belum masuk",
+    "kata_kunci": ["top up", "topup", "isi saldo", "saldo belum masuk", "saldo ga masuk", "saldo gak masuk", "saldo tidak masuk", "belum masuk", "ga masuk", "gak masuk", "nggak masuk", "tidak masuk", "va", "virtual account", "isi gopay"],
+    "prioritas": "P2", "sla": "Selesai di chat (otomatis) atau maks 1x24 jam", "tim": "Tim Pembayaran",
+    "sop": [
+      "Cek transaksi top up terbaru milik pengguna (jangan minta bukti dulu kalau datanya sudah ada di sistem).",
+      "Status DANA_DITERIMA_BANK = uang sudah diterima bank tapi belum dikreditkan -> jalankan rekonsiliasi_topup, saldo langsung masuk.",
+      "Status GAGAL_DEBIT_TERPOTONG = rekening terpotong tapi top up gagal -> ajukan pengembalian dana ke bank, beri estimasi pasti (1x24 jam kerja) & nomor tiket.",
+      "Status DUPLIKAT_TERDETEKSI = terpotong 2x -> kembalikan dana duplikat ke saldo GoPay saat itu juga (atau ke sumber dana jika pengguna minta).",
+      "Data tidak ditemukan -> minta nominal, metode, jam transaksi & foto bukti bayar."
+    ],
+    "kompensasi": "Jika kesalahan dari sistem dan pengguna dirugikan waktu: voucher GoFood/GoRide Rp10.000 (opsional).",
+    "jangan": ["Jangan jawab 'mohon tunggu 3x24 jam' tanpa mengecek status.", "Jangan minta OTP/PIN."]
+  },
+  {
+    "id": "REFUND_BELUM_MASUK", "kategori": "Keuangan", "nama": "Refund belum diterima",
+    "kata_kunci": ["refund", "pengembalian dana", "uang kembali", "dana kembali", "balikin uang", "uang belum balik"],
+    "prioritas": "P3", "sla": "Refund ke GoPay instan, ke bank 1-3 hari kerja", "tim": "Tim Pembayaran",
+    "sop": ["Cek pesanan/transaksi yang di-refund.", "Jelaskan posisi dana saat ini secara spesifik.", "Jika tertahan, proses ulang refund ke saldo GoPay."],
+    "kompensasi": "-", "jangan": ["Jangan memberi estimasi tanpa cek data."]
+  },
+  {
+    "id": "AKUN_DIRETAS", "kategori": "Keamanan", "nama": "Akun diretas / transaksi tidak dikenal",
+    "kata_kunci": ["diretas", "dihack", "hack", "kebobolan", "dibobol", "bukan saya", "bukan aku", "tidak saya lakukan", "ga pernah transfer", "gak pernah transfer", "saldo hilang", "saldo berkurang", "saldo habis", "transaksi aneh", "tidak dikenal", "login orang lain", "akun dipakai orang", "order bukan aku", "order bukan saya"],
+    "prioritas": "P1", "sla": "Akun diamankan < 1 menit, investigasi 3x24 jam", "tim": "Tim Fraud & Keamanan",
+    "sop": [
+      "Prioritas: AMANKAN AKUN dulu (amankan_akun) sebelum menjelaskan panjang lebar.",
+      "Tahan transaksi yang masih DIPROSES.",
+      "Tampilkan daftar transaksi mencurigakan agar pengguna konfirmasi.",
+      "Buat tiket P1 ke Tim Fraud, eskalasi ke agen manusia.",
+      "Edukasi: jangan pernah berikan OTP/PIN, ganti PIN, sarankan lapor polisi untuk klaim (surat laporan bantu proses)."
+    ],
+    "kompensasi": "Dana yang berhasil ditahan dikembalikan penuh. Dana yang sudah keluar diproses investigasi & pemblokiran rekening tujuan.",
+    "jangan": ["Jangan bercanda.", "Jangan menyalahkan korban.", "Jangan minta OTP/PIN/password."]
+  },
+  {
+    "id": "PENIPUAN_OTP", "kategori": "Keamanan", "nama": "Dihubungi penipu / diminta OTP",
+    "kata_kunci": ["minta otp", "kode otp", "minta kode", "ngaku dari gojek", "ngaku cs", "telepon dari", "penipu", "penipuan", "link aneh", "hadiah", "undian"],
+    "prioritas": "P2", "sla": "Langsung", "tim": "Tim Fraud & Keamanan",
+    "sop": ["Tanya apakah OTP/PIN sudah diberikan.", "Jika sudah -> perlakukan seperti AKUN_DIRETAS.", "Jika belum -> tenangkan, apresiasi, catat nomor penipu untuk diblokir."],
+    "kompensasi": "-", "jangan": ["Jangan minta OTP."]
+  },
+  {
+    "id": "SALAH_TRANSFER", "kategori": "Keuangan", "nama": "Salah transfer",
+    "kata_kunci": ["salah transfer", "salah kirim", "kirim ke nomor salah", "salah nomor", "transfer nyasar"],
+    "prioritas": "P2", "sla": "3-7 hari kerja", "tim": "Tim Pembayaran",
+    "sop": ["Kumpulkan nomor tujuan, nominal, waktu.", "Buat tiket mediasi dengan penerima (sistem menghubungi penerima, bukan pengguna).", "Jelaskan dana tidak bisa ditarik paksa tanpa persetujuan penerima kecuali ada laporan polisi."],
+    "kompensasi": "-", "jangan": ["Jangan menjanjikan dana pasti kembali."]
+  },
+  {
+    "id": "FOOD_TERLAMBAT", "kategori": "GoFood", "nama": "Makanan lama / resto lambat menyiapkan",
+    "kata_kunci": ["lama banget", "lama bgt", "kok lama", "belum sampai", "belum dateng", "belum datang", "telat", "terlambat", "nunggu", "menunggu", "lapar", "laper", "resto lama", "masih dimasak", "kapan sampai", "gofood lama", "pesanan lama", "makanan belum"],
+    "prioritas": "P3", "sla": "Langsung", "tim": "Tim Merchant",
+    "sop": [
+      "Cek pesanan aktif & hitung keterlambatan dibanding estimasi.",
+      "Hubungi merchant untuk dapat estimasi baru yang pasti.",
+      "Beri pilihan: (a) tunggu + voucher kompensasi, atau (b) batalkan + refund penuh ke GoPay instan.",
+      "Catat keterlambatan ke performa merchant."
+    ],
+    "kompensasi": "Telat > 15 menit: voucher Rp10.000. Telat > 30 menit: voucher Rp15.000 atau batal + refund penuh.",
+    "jangan": ["Jangan menyalahkan driver kalau masalahnya di resto."]
+  },
+  {
+    "id": "FOOD_SALAH_KURANG", "kategori": "GoFood", "nama": "Pesanan kurang / salah item",
+    "kata_kunci": ["kurang", "nggak ada", "ga ada", "gak ada", "tidak ada", "salah pesanan", "pesanan salah", "salah menu", "ketinggalan", "lupa dimasukin", "tidak lengkap", "ga lengkap", "gak lengkap"],
+    "prioritas": "P3", "sla": "Refund instan", "tim": "Tim Merchant",
+    "sop": ["Cek detail item pesanan.", "Konfirmasi item yang kurang/salah.", "Refund harga item ke GoPay instan (otomatis jika <= Rp100.000).", "Laporkan merchant."],
+    "kompensasi": "Refund harga item + voucher Rp5.000 permintaan maaf.", "jangan": ["Jangan minta pengguna menghubungi resto sendiri."]
+  },
+  {
+    "id": "FOOD_RUSAK", "kategori": "GoFood", "nama": "Makanan tumpah / rusak / basi",
+    "kata_kunci": ["tumpah", "basi", "rusak", "dingin", "berantakan", "bau", "busuk", "kemasan bocor", "ada rambut", "ada kecoa", "ada lalat"],
+    "prioritas": "P3", "sla": "Refund instan", "tim": "Tim Merchant",
+    "sop": ["Minta foto (opsional, jangan jadikan syarat mutlak untuk nominal kecil).", "Refund penuh/sebagian.", "Laporkan merchant/driver sesuai penyebab."],
+    "kompensasi": "Refund penuh untuk makanan basi/kontaminasi + voucher Rp10.000.", "jangan": ["Jangan berdebat soal penyebab."]
+  },
+  {
+    "id": "DRIVER_TIDAK_SOPAN", "kategori": "Mitra", "nama": "Driver tidak sopan / bikin tidak nyaman",
+    "kata_kunci": ["tidak sopan", "ga sopan", "gak sopan", "nggak sopan", "kasar", "marah-marah", "marah marah", "bentak", "galak", "jutek", "merokok", "bau rokok", "tidak nyaman", "ga nyaman", "gak nyaman", "nggak nyaman", "nyebelin", "ngomel", "ugal", "ngebut", "kebut"],
+    "prioritas": "P3", "sla": "Laporan diproses 2x24 jam", "tim": "Tim Kualitas Mitra",
+    "sop": ["Dengarkan cerita lengkap, validasi perasaan.", "Cek pesanan terkait.", "laporkan_mitra (tingkat sedang).", "Pastikan pengguna tidak dipertemukan lagi dengan driver itu.", "Beri voucher permintaan maaf."],
+    "kompensasi": "Voucher Rp15.000.", "jangan": ["Jangan membela driver.", "Jangan meminta pengguna 'memaklumi'."]
+  },
+  {
+    "id": "PELECEHAN", "kategori": "Keselamatan", "nama": "Pelecehan / kekerasan oleh mitra",
+    "kata_kunci": ["pelecehan", "dilecehkan", "melecehkan", "dipegang", "pegang-pegang", "megang", "colek", "cabul", "mesum", "diancam", "ancam", "kekerasan", "dipukul", "takut", "dikunci", "pintu dikunci", "dibawa ke", "diculik"],
+    "prioritas": "P1", "sla": "Respon < 5 menit oleh Unit Safety", "tim": "Unit Keselamatan (Safety Response)",
+    "sop": [
+      "Tanyakan dulu: apakah sekarang sudah di tempat aman? Jika dalam bahaya -> arahkan 112 & tombol darurat.",
+      "Validasi: ini bukan salahmu.",
+      "laporkan_mitra tingkat BERAT (akun mitra dinonaktifkan sementara).",
+      "Buat tiket P1 & eskalasi ke Unit Safety manusia.",
+      "Tawarkan pendampingan psikolog & bantuan hukum/pelaporan polisi."
+    ],
+    "kompensasi": "Refund penuh perjalanan, pendampingan psikolog & hukum.",
+    "jangan": ["Jangan bercanda.", "Jangan menanyakan detail secara berlebihan.", "Jangan meragukan cerita korban."]
+  },
+  {
+    "id": "KECELAKAAN", "kategori": "Keselamatan", "nama": "Kecelakaan saat perjalanan",
+    "kata_kunci": ["kecelakaan", "jatuh", "tabrakan", "ditabrak", "nabrak", "luka", "berdarah", "terluka"],
+    "prioritas": "P1", "sla": "Respon < 5 menit", "tim": "Unit Keselamatan (Safety Response)",
+    "sop": ["Pastikan kondisi & lokasi, arahkan 112/119 jika butuh medis.", "Aktifkan klaim asuransi perjalanan.", "Eskalasi ke Unit Safety."],
+    "kompensasi": "Asuransi perjalanan (biaya medis).", "jangan": ["Jangan bercanda."]
+  },
+  {
+    "id": "BARANG_TERTINGGAL", "kategori": "Mitra", "nama": "Barang tertinggal di kendaraan",
+    "kata_kunci": ["ketinggalan di", "tertinggal", "barang ketinggalan", "dompet ketinggalan", "hp ketinggalan", "jatuh di motor", "lupa bawa", "ketinggalan barang", "ketinggalan dompet", "ketinggalan payung"],
+    "prioritas": "P3", "sla": "Langsung", "tim": "Tim Operasional",
+    "sop": ["Cek perjalanan terakhir.", "hubungi_driver untuk cek barang.", "Atur pengembalian (GoSend, ongkir ditanggung jika driver setuju antar)."],
+    "kompensasi": "-", "jangan": ["Jangan berikan nomor asli driver."]
+  },
+  {
+    "id": "PENCURIAN_PAKET_HILANG", "kategori": "Keamanan", "nama": "Pencurian / paket GoSend hilang",
+    "kata_kunci": ["dicuri", "pencurian", "maling", "nyuri", "paket hilang", "barang hilang", "tidak sampai", "ga sampai", "gak sampai", "nggak sampai", "belum diterima", "paket ga ada", "gosend", "kiriman"],
+    "prioritas": "P1", "sla": "Investigasi 3x24 jam, klaim asuransi 7 hari kerja", "tim": "Tim Fraud & Keamanan",
+    "sop": ["Cek order GoSend & bukti serah terima.", "Cocokkan flag sistem (GPS, foto).", "laporkan_mitra tingkat berat jika indikasi kuat; tahan pencairan dana mitra.", "Buat klaim asuransi & tiket P1, eskalasi manusia (nilai > Rp100.000)."],
+    "kompensasi": "Asuransi GoSend sesuai nilai deklarasi s.d. batas polis.", "jangan": ["Jangan menuduh driver secara definitif ke pengguna; sebut 'investigasi'."]
+  },
+  {
+    "id": "ORDER_FIKTIF", "kategori": "Mitra", "nama": "Order fiktif (dilaporkan mitra driver)",
+    "kata_kunci": ["fiktif", "order palsu", "orderan palsu", "order bodong", "orderan bodong", "prank", "customer hilang", "alamat palsu", "nomor ga aktif", "nombok", "nalangin", "talangan", "ditipu customer", "pemesan ga bisa dihubungi"],
+    "prioritas": "P2", "sla": "Penggantian otomatis jika >= 2 indikasi fraud", "tim": "Tim Mitra & Fraud",
+    "sop": ["Cek order & flag sistem.", "Jika indikasi fraud >= 2: ganti dana talangan ke dompet mitra (s.d. Rp300.000) & blokir akun pemesan.", "Jika kurang bukti: tiket investigasi 1x24 jam.", "Pastikan rating & performa mitra tidak terdampak."],
+    "kompensasi": "Penggantian penuh dana talangan (maks Rp300.000 otomatis).", "jangan": ["Jangan menyalahkan mitra."]
+  },
+  {
+    "id": "TARIF_TIDAK_SESUAI", "kategori": "Keuangan", "nama": "Tarif tidak sesuai / kemahalan",
+    "kata_kunci": ["tarif", "mahal", "kemahalan", "ditagih lebih", "harga beda", "beda harga", "biaya tambahan", "kok jadi", "lebih mahal", "overcharge", "kelebihan bayar"],
+    "prioritas": "P3", "sla": "Refund selisih instan", "tim": "Tim Pembayaran",
+    "sop": ["Cek rincian tarif & log sistem.", "Jika selisih karena perubahan yang tidak disetujui pelanggan -> refund selisih instan.", "Jika sah (tol, parkir, tunggu) -> jelaskan rinciannya dengan jujur."],
+    "kompensasi": "Refund selisih.", "jangan": ["Jangan menjawab 'tarif sudah sesuai sistem' tanpa rincian."]
+  },
+  {
+    "id": "DRIVER_MINTA_TAMBAHAN", "kategori": "Mitra", "nama": "Driver minta uang tambahan / minta cancel / order offline",
+    "kata_kunci": ["minta tambahan", "minta uang lebih", "minta lebih", "minta tips", "minta cancel", "disuruh cancel", "suruh batalin", "offline aja", "bayar langsung"],
+    "prioritas": "P2", "sla": "2x24 jam", "tim": "Tim Kualitas Mitra",
+    "sop": ["Laporkan mitra (sedang).", "Refund uang tambahan yang dibayarkan.", "Ingatkan untuk tidak melakukan transaksi di luar aplikasi demi keamanan."],
+    "kompensasi": "Refund uang tambahan + voucher Rp10.000.", "jangan": []
+  },
+  {
+    "id": "PROMO_TIDAK_BISA", "kategori": "Promo", "nama": "Promo/voucher tidak bisa dipakai",
+    "kata_kunci": ["promo", "voucher", "diskon", "kode promo", "cashback", "potongan"],
+    "prioritas": "P4", "sla": "Langsung", "tim": "Tim Promo",
+    "sop": ["Cek syarat promo umum (minimal transaksi, metode bayar GoPay, area, kuota harian).", "Jika error sistem -> berikan voucher pengganti."],
+    "kompensasi": "Voucher pengganti jika kesalahan sistem.", "jangan": []
+  },
+  {
+    "id": "AKUN_TERBLOKIR", "kategori": "Akun", "nama": "Akun / GoPay terblokir",
+    "kata_kunci": ["terblokir", "diblokir", "kebanned", "ke-banned", "dibekukan", "tidak bisa login", "ga bisa login", "gak bisa login", "akun dikunci", "suspend"],
+    "prioritas": "P2", "sla": "1x24 jam", "tim": "Tim Akun",
+    "sop": ["Cek status akun.", "Jelaskan alasan (jika diblokir karena pengamanan, jelaskan cara membuka: verifikasi wajah & KTP).", "Buat tiket."],
+    "kompensasi": "-", "jangan": ["Jangan buka blokir tanpa verifikasi."]
+  },
+  {
+    "id": "MINTA_MANUSIA", "kategori": "Umum", "nama": "Minta bicara dengan agen manusia",
+    "kata_kunci": ["agen manusia", "cs manusia", "orang asli", "manusia", "operator", "sambungkan ke cs", "bicara dengan petugas", "telepon cs"],
+    "prioritas": "P3", "sla": "Antrean agen manusia", "tim": "Tim Customer Care",
+    "sop": ["Hormati permintaan, jangan menahan-nahan.", "Ringkas kasus agar pengguna tidak perlu mengulang cerita.", "eskalasi_manusia."],
+    "kompensasi": "-", "jangan": ["Jangan memaksa tetap chat dengan AI."]
+  }
+]

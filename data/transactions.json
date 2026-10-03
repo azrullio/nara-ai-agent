@@ -1,0 +1,20 @@
+[
+  { "id": "TP-240901", "user_id": "U001", "jenis": "TOPUP", "nominal": 100000, "metode": "BCA Virtual Account", "ref_bank": "BCA-77812093", "menit_lalu": 35,
+    "status": "DANA_DITERIMA_BANK", "keterangan_sistem": "Dana sudah settle di rekening penampung BCA, callback ke ledger GoPay timeout (gangguan settlement batch 10:00). Belum dikreditkan ke saldo." },
+  { "id": "PAY-551201", "user_id": "U001", "jenis": "PEMBAYARAN", "nominal": 68000, "metode": "GoPay", "ref_order": "GF-88213", "menit_lalu": 52, "status": "SUKSES" },
+
+  { "id": "TP-240902", "user_id": "U002", "jenis": "TOPUP", "nominal": 50000, "metode": "Mandiri Virtual Account", "ref_bank": "MDR-5530021", "menit_lalu": 190,
+    "status": "GAGAL_DEBIT_TERPOTONG", "keterangan_sistem": "Bank memotong rekening, namun transaksi ditolak ledger karena VA kedaluwarsa. Dana belum dikembalikan bank." },
+  { "id": "TP-240903", "user_id": "U002", "jenis": "TOPUP", "nominal": 200000, "metode": "Alfamart", "ref_bank": "ALF-0912881", "menit_lalu": 75, "status": "SUKSES" },
+  { "id": "TP-240904", "user_id": "U002", "jenis": "TOPUP", "nominal": 200000, "metode": "Alfamart", "ref_bank": "ALF-0912881", "menit_lalu": 74,
+    "status": "DUPLIKAT_TERDETEKSI", "keterangan_sistem": "Ref kasir sama dengan TP-240903, terpotong 2x di kasir. Dana kedua tertahan di sistem." },
+
+  { "id": "TRF-700311", "user_id": "U003", "jenis": "TRANSFER_KELUAR", "nominal": 500000, "metode": "GoPay -> Bank BRI 0098xxxx21 a.n. 'MULYADI'", "menit_lalu": 26, "status": "SUKSES", "perangkat": "Xiaomi Redmi Note 12 (Medan)" },
+  { "id": "TRF-700312", "user_id": "U003", "jenis": "TRANSFER_KELUAR", "nominal": 450000, "metode": "GoPay -> Bank BRI 0098xxxx21 a.n. 'MULYADI'", "menit_lalu": 22, "status": "SUKSES", "perangkat": "Xiaomi Redmi Note 12 (Medan)" },
+  { "id": "TRF-700313", "user_id": "U003", "jenis": "TRANSFER_KELUAR", "nominal": 300000, "metode": "GoPay -> Dana 0857xxxx90", "menit_lalu": 3, "status": "DIPROSES", "perangkat": "Xiaomi Redmi Note 12 (Medan)" },
+  { "id": "TP-240800", "user_id": "U003", "jenis": "TOPUP", "nominal": 1250000, "metode": "BNI Virtual Account", "menit_lalu": 2880, "status": "SUKSES" },
+
+  { "id": "PAY-551300", "user_id": "U004", "jenis": "PEMBAYARAN", "nominal": 61000, "metode": "GoPay", "ref_order": "GF-77120", "menit_lalu": 55, "status": "SUKSES" },
+  { "id": "PAY-551301", "user_id": "U004", "jenis": "PEMBAYARAN", "nominal": 58000, "metode": "GoPay", "ref_order": "GC-33019", "menit_lalu": 120, "status": "SUKSES" },
+  { "id": "PAY-551400", "user_id": "U005", "jenis": "PEMBAYARAN", "nominal": 61000, "metode": "GoPay", "ref_order": "GC-33088", "menit_lalu": 40, "status": "SUKSES" }
+]

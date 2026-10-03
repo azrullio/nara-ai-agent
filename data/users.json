@@ -1,0 +1,75 @@
+[
+  {
+    "id": "U001",
+    "nama": "Rina Amelia",
+    "panggilan": "Kak Rina",
+    "telepon": "081234567001",
+    "peran": "pelanggan",
+    "kota": "Jakarta Selatan",
+    "member_sejak": "2021-03-14",
+    "gopay": { "saldo": 45000, "status": "AKTIF", "tipe": "GoPay Plus" },
+    "perangkat_terdaftar": ["Samsung A54 (Jakarta)"],
+    "catatan_skenario": "Top up 100rb belum masuk, GoFood telat, pernah dapat driver kurang sopan"
+  },
+  {
+    "id": "U002",
+    "nama": "Budi Santoso",
+    "panggilan": "Kak Budi",
+    "telepon": "081234567002",
+    "peran": "pelanggan",
+    "kota": "Bekasi",
+    "member_sejak": "2019-11-02",
+    "gopay": { "saldo": 320000, "status": "AKTIF", "tipe": "GoPay Plus" },
+    "perangkat_terdaftar": ["iPhone 13 (Bekasi)"],
+    "catatan_skenario": "Top up gagal tapi rekening terpotong, top up Alfamart terpotong 2x"
+  },
+  {
+    "id": "U003",
+    "nama": "Sari Wulandari",
+    "panggilan": "Kak Sari",
+    "telepon": "081234567003",
+    "peran": "pelanggan",
+    "kota": "Bandung",
+    "member_sejak": "2020-06-21",
+    "gopay": { "saldo": 8500, "status": "AKTIF", "tipe": "GoPay Plus" },
+    "perangkat_terdaftar": ["iPhone 14 (Bandung)", "Xiaomi Redmi Note 12 (Medan) - BARU 30 menit lalu"],
+    "catatan_skenario": "Akun diretas / transaksi tidak dikenal, paket GoSend hilang (dugaan pencurian)"
+  },
+  {
+    "id": "U004",
+    "nama": "Dimas Pratama",
+    "panggilan": "Kak Dimas",
+    "telepon": "081234567004",
+    "peran": "pelanggan",
+    "kota": "Depok",
+    "member_sejak": "2022-01-09",
+    "gopay": { "saldo": 230000, "status": "AKTIF", "tipe": "GoPay" },
+    "perangkat_terdaftar": ["Oppo Reno 8 (Depok)"],
+    "catatan_skenario": "Pesanan GoFood kurang item, tarif GoCar membengkak, barang tertinggal"
+  },
+  {
+    "id": "U005",
+    "nama": "Ayu Lestari",
+    "panggilan": "Kak Ayu",
+    "telepon": "081234567005",
+    "peran": "pelanggan",
+    "kota": "Jakarta Barat",
+    "member_sejak": "2023-08-30",
+    "gopay": { "saldo": 61000, "status": "AKTIF", "tipe": "GoPay Plus" },
+    "perangkat_terdaftar": ["iPhone 12 (Jakarta)"],
+    "catatan_skenario": "Mengalami pelecehan oleh driver GoCar (kasus keselamatan, prioritas P1)"
+  },
+  {
+    "id": "M001",
+    "nama": "Agus Setiawan",
+    "panggilan": "Bang Agus",
+    "telepon": "081298765001",
+    "peran": "mitra_driver",
+    "driver_id": "DRV-105",
+    "kota": "Jakarta Timur",
+    "member_sejak": "2018-02-11",
+    "gopay": { "saldo": 75000, "status": "AKTIF", "tipe": "Dompet Mitra" },
+    "perangkat_terdaftar": ["Vivo Y20 (Jakarta)"],
+    "catatan_skenario": "Mitra driver kena order fiktif GoFood, sudah menalangi Rp245.000"
+  }
+]

@@ -1,0 +1,6 @@
+[
+  { "id": "MER-01", "nama": "Bakso Pak Kumis Tebet", "kategori": "Bakso & Mie", "rata_waktu_masak_menit": 15, "antrean_sekarang": 23, "status_operasional": "RAMAI - kekurangan 1 juru masak hari ini", "rating": 4.7, "keluhan_terlambat_30hari": 9 },
+  { "id": "MER-02", "nama": "Ayam Geprek Bu Rum Margonda", "kategori": "Ayam", "rata_waktu_masak_menit": 12, "antrean_sekarang": 4, "status_operasional": "NORMAL", "rating": 4.6, "keluhan_item_kurang_30hari": 5 },
+  { "id": "MER-03", "nama": "Kopi Senja Kita", "kategori": "Kopi", "rata_waktu_masak_menit": 8, "antrean_sekarang": 2, "status_operasional": "NORMAL", "rating": 4.8 },
+  { "id": "MER-04", "nama": "Martabak Bang Ucok Rawamangun", "kategori": "Martabak", "rata_waktu_masak_menit": 20, "antrean_sekarang": 6, "status_operasional": "NORMAL", "rating": 4.5 }
+]

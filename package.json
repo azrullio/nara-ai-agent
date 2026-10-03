@@ -1,0 +1,15 @@
+{
+  "name": "gocare-ai-agent",
+  "version": "1.0.0",
+  "description": "AI Agent customer service (simulasi) untuk aplikasi ojol & e-wallet: empatik, bisa cek data & ambil tindakan nyata.",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node src/selftest.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "latest"
+  },
+  "engines": { "node": ">=20" }
+}

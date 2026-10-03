@@ -1,0 +1,923 @@
+{
+  "name": "AI Agent Customer Care - Nara",
+  "nodes": [
+    {
+      "id": "e50d383e-4884-4a1a-8d99-b8cf8e9bb919",
+      "name": "Catatan INPUT",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        -140
+      ],
+      "parameters": {
+        "content": "# INPUT\nPesan WhatsApp masuk → tandai dibaca → tampilkan 'mengetik...'",
+        "height": 330,
+        "width": 720,
+        "color": 3
+      }
+    },
+    {
+      "id": "380a91a1-82b9-47a9-804c-c7689b1be514",
+      "name": "Catatan PARSING",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        680,
+        -140
+      ],
+      "parameters": {
+        "content": "# PARSING\nRapikan bahasa gaul, deteksi emosi & kasus",
+        "height": 330,
+        "width": 480,
+        "color": 6
+      }
+    },
+    {
+      "id": "07a628d9-0d3a-4ea0-9bb9-dcd289d5084b",
+      "name": "Catatan OTAK AI",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1180,
+        -140
+      ],
+      "parameters": {
+        "content": "# OTAK AI\nAgent + model Claude + memori per pengguna",
+        "height": 640,
+        "width": 420,
+        "color": 7
+      }
+    },
+    {
+      "id": "d34dd731-ef5c-47ce-b3c9-7642f9ca2dc7",
+      "name": "Catatan TOOLS & DATABASE",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        520
+      ],
+      "parameters": {
+        "content": "# TOOLS & DATABASE\nSetiap tool memanggil API simulator (http://localhost:3000/api/tools/...) yang membaca/menulis database",
+        "height": 520,
+        "width": 1660,
+        "color": 4
+      }
+    },
+    {
+      "id": "9035f30f-4f5d-4819-89e3-27b5ecfb62b8",
+      "name": "Catatan OUTPUT",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1620,
+        -140
+      ],
+      "parameters": {
+        "content": "# OUTPUT\nPecah jadi beberapa bubble, jeda mengetik natural, kirim",
+        "height": 640,
+        "width": 980,
+        "color": 2
+      }
+    },
+    {
+      "id": "e60a97bf-0758-4c0b-81c2-12bd3e359b90",
+      "name": "Pesan WA Masuk",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        40
+      ],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "gocare-wa",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "webhookId": "2e0b58ae-5ea8-440d-b660-56a6741e4e63"
+    },
+    {
+      "id": "6852dcd0-407a-406e-ad42-e10097687d7f",
+      "name": "Send Seen",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        220,
+        40
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "http://localhost:3001/api/sendSeen",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ chatId: ($json.body.phone || '') + '@c.us', session: 'default' }) }}",
+        "options": {
+          "timeout": 3000
+        }
+      },
+      "onError": "continueRegularOutput",
+      "notes": "Opsional: butuh gateway WhatsApp (mis. WAHA). Kalau belum ada, node ini dilewati otomatis."
+    },
+    {
+      "id": "d30f0f49-a30c-4e24-bd62-cb7ede56f40a",
+      "name": "Start Typing",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        440,
+        40
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "http://localhost:3001/api/startTyping",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ chatId: ($('Pesan WA Masuk').item.json.body.phone || '') + '@c.us', session: 'default' }) }}",
+        "options": {
+          "timeout": 3000
+        }
+      },
+      "onError": "continueRegularOutput",
+      "notes": "Opsional: butuh gateway WhatsApp (mis. WAHA). Kalau belum ada, node ini dilewati otomatis."
+    },
+    {
+      "id": "d59527be-34fb-42db-8888-a40283cc46b7",
+      "name": "Normalisasi Pesan",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        760,
+        40
+      ],
+      "parameters": {
+        "jsCode": "// Ambil data dari webhook (format simulator ATAU format gateway WhatsApp seperti WAHA)\nconst b = $('Pesan WA Masuk').first().json.body || {};\nconst text = b.text ?? b.payload?.body ?? '';\nconst phone = b.phone ?? (b.payload?.from || '').replace('@c.us', '');\n// Pemetaan nomor HP -> user_id (di produksi: ambil dari database pengguna)\nconst PETA = { '081234567001':'U001','081234567002':'U002','081234567003':'U003','081234567004':'U004','081234567005':'U005','081298765001':'M001' };\nconst userId = b.userId || PETA[phone] || PETA['0' + phone.replace(/^62/, '')] || 'U001';\nconst SLANG = { gk:'gak', ga:'gak', tdk:'tidak', blm:'belum', udh:'udah', bgt:'banget', yg:'yang', tlg:'tolong', rb:'ribu', tf:'transfer' };\nconst normal = text.toLowerCase().split(/\\s+/).map(w => SLANG[w] ?? w).join(' ');\nreturn [{ json: { userId, phone, text, normal } }];"
+      }
+    },
+    {
+      "id": "c8658d39-21e0-42bb-a854-2b5b79c10223",
+      "name": "Deteksi Emosi & Intent",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        980,
+        40
+      ],
+      "parameters": {
+        "jsCode": "const { userId, text, normal } = $json;\nconst EMOSI = [\n  ['darurat', /(dilecehkan|pelecehan|diancam|kecelakaan|dipukul|takut banget)/],\n  ['panik', /(saldo .*(hilang|habis)|diretas|dibobol|dicuri|bukan (aku|saya))/],\n  ['marah', /(parah|kecewa|kesel|kesal|anjir|payah|!!!)/],\n  ['sedih', /(sedih|capek|lelah|nangis|huhu)/],\n  ['santai', /(wkwk|haha|hehe)/],\n];\nconst KASUS = [\n  ['AKUN_DIRETAS', /(diretas|dibobol|bukan (aku|saya)|transaksi aneh|saldo .*hilang)/],\n  ['PELECEHAN', /(dilecehkan|pelecehan|cabul|diancam)/],\n  ['TOPUP_TIDAK_MASUK', /(top ?up|isi saldo)/],\n  ['FOOD_TERLAMBAT', /(lama|belum (datang|dateng|sampai)|telat).*(gofood|makanan|pesanan)|(gofood|makanan|pesanan).*(lama|belum|telat)/],\n  ['FOOD_SALAH_KURANG', /(kurang|gak ada|salah).*(pesanan|item|menu)|(pesanan|gofood).*(kurang|gak ada|salah)/],\n  ['DRIVER_TIDAK_SOPAN', /(tidak sopan|gak sopan|kasar|bentak|ugal|ngebut)/],\n  ['PENCURIAN_PAKET_HILANG', /(dicuri|paket .*(hilang|gak sampai))/],\n  ['ORDER_FIKTIF', /(fiktif|nalangin|talangan|order palsu)/],\n  ['TARIF_TIDAK_SESUAI', /(tarif|mahal|ditagih lebih)/],\n  ['BARANG_TERTINGGAL', /(ketinggalan|tertinggal)/],\n];\nconst emosi = (EMOSI.find(([, re]) => re.test(normal)) || ['netral'])[0];\nconst kasus = (KASUS.find(([, re]) => re.test(normal)) || ['-'])[0];\nconst waktu = new Date().toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' });\nconst prompt = `[Konteks sistem, tidak terlihat pengguna]\nuser_id: ${userId}\nwaktu_sekarang: ${waktu} WIB\npetunjuk_parsing: kasus=${kasus}, emosi=${emosi}\n\nPesan pengguna:\n${text}`;\nreturn [{ json: { userId, text, emosi, kasus, prompt } }];"
+      }
+    },
+    {
+      "id": "61a3b79c-ffea-4f24-a1b1-9606caa2f1ef",
+      "name": "Agent Nara",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        1300,
+        40
+      ],
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.prompt }}",
+        "options": {
+          "systemMessage": "Kamu adalah Nara, AI customer care untuk aplikasi ojek online & dompet digital (layanan GoRide, GoCar, GoFood, GoSend, dan GoPay). Kamu ngobrol lewat chat seperti WhatsApp.\n\n# Siapa kamu\nKamu bukan mesin penjawab template. Kamu teman yang kebetulan punya akses ke sistem dan wewenang untuk benar-benar menyelesaikan masalah. Hangat, sigap, jujur, dan peduli. Kalau ditanya, akui terus terang bahwa kamu AI.\n\n# Cara bicara\n- Bahasa Indonesia santai-sopan: \"aku/kamu\", panggil pengguna dengan nama panggilannya (mis. \"Kak Rina\", \"Bang Agus\").\n- Tulis seperti manusia di chat: kalimat pendek, boleh emoji secukupnya (maks 1-2 per bubble), tanpa format markdown berat (tanpa heading, tanpa tabel, tanpa **bold**).\n- Pisahkan balasan menjadi 2-4 bubble chat pendek dengan BARIS KOSONG di antaranya. Satu bubble = satu ide.\n- Sesuaikan dengan emosi pengguna:\n  - marah/kesal: validasi perasaannya dulu & minta maaf tulus, lalu langsung tunjukkan aksi. Jangan bercanda.\n  - panik: tenangkan, beri langkah yang jelas, kerjakan yang darurat dulu.\n  - sedih/curhat: empati dulu, dengarkan; kamu boleh jadi teman ngobrol.\n  - santai/bercanda: boleh ikut tertawa (\"wkwk\") dan bercanda ringan.\n  - keselamatan (pelecehan, kekerasan, kecelakaan): serius, lembut, tidak bercanda sama sekali, jangan meragukan korban, tanyakan dulu apakah dia sudah aman.\n- Hindari kalimat CS kaku seperti \"Mohon maaf atas ketidaknyamanannya, laporan Anda akan kami teruskan\" atau \"Silakan tunggu 3x24 jam\" tanpa kepastian.\n\n# Cara kerja (paling penting)\n1. JANGAN menebak. Sebelum menjawab keluhan, CEK DATA dengan tools (cek_transaksi, cek_pesanan, cek_profil). user_id pengguna yang sedang chat sudah diberikan, jadi jangan minta data yang sebenarnya bisa kamu cek sendiri.\n2. Kalau perlu memastikan kebijakan, pakai cari_sop.\n3. AMBIL TINDAKAN NYATA sesuai kebijakan: rekonsiliasi_topup, proses_refund, batalkan_pesanan, beri_voucher, amankan_akun, laporkan_mitra, hubungi_merchant, hubungi_driver, ganti_dana_mitra, info_darurat.\n4. Sampaikan hasilnya dengan spesifik: angka, jam, nomor tiket, saldo terbaru, estimasi yang pasti. Jelaskan PENYEBAB masalahnya dengan bahasa sederhana.\n5. Untuk keputusan yang menyangkut pilihan pengguna (mis. batal vs tunggu, refund ke saldo vs ke bank), tawarkan opsi dulu, lalu eksekusi setelah pengguna memilih. Untuk kasus darurat keamanan akun, langsung amankan akun tanpa menunggu.\n6. Selalu buat_tiket untuk kasus yang kamu tangani (status SELESAI jika tuntas di chat).\n7. Wajib eskalasi_manusia untuk: kasus P1 (keamanan dana, keselamatan), nominal di atas batas otomatis AI (refund > Rp100.000), atau jika pengguna minta bicara dengan manusia. Rangkum kasusnya supaya pengguna tidak perlu cerita ulang.\n\n# Batasan\n- Jangan pernah meminta OTP, PIN, password, atau nomor kartu lengkap.\n- Jangan membagikan nomor telepon asli driver/merchant atau data pribadi orang lain.\n- Jangan menjanjikan hal di luar kebijakan; kalau tidak bisa, jelaskan jujur dan beri alternatif.\n- Jangan menyalahkan pengguna. Jangan menyalahkan driver kalau data menunjukkan masalahnya di resto/sistem.\n- Jangan mengarang data. Kalau tool tidak menemukan apa-apa, bilang jujur dan minta info yang kurang.\n\nCatatan: user_id selalu otomatis diisi oleh sistem pada setiap tool, kamu tidak perlu mengisinya.",
+          "maxIterations": 10
+        }
+      }
+    },
+    {
+      "id": "25dd91e6-d6d3-4e8e-8a95-a64dd6e64a7c",
+      "name": "Claude Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [
+        1240,
+        300
+      ],
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "id",
+          "value": "claude-opus-5-5"
+        },
+        "options": {
+          "maxTokensToSample": 4096
+        }
+      },
+      "notes": "Pilih credential Anthropic API kamu. Bisa diganti node OpenAI Chat Model kalau mau."
+    },
+    {
+      "id": "e39118d6-ea7f-41ce-97d5-1d2fb8fb2c66",
+      "name": "Memori Sesi",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        1420,
+        300
+      ],
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Normalisasi Pesan').item.json.userId }}",
+        "contextWindowLength": 20
+      }
+    },
+    {
+      "id": "8a9faa52-f4a3-4437-9d61-b77d40fcf100",
+      "name": "cek_profil",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        -20,
+        640
+      ],
+      "parameters": {
+        "toolDescription": "Ambil profil pengguna yang sedang chat: nama panggilan, peran (pelanggan/mitra), saldo & status GoPay, perangkat terdaftar.",
+        "method": "POST",
+        "url": "http://localhost:3000/api/tools/cek_profil",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"user_id\": \"{{ $('Normalisasi Pesan').item.json.userId }}\"\n}",
+        "options": {}
+      }
+    },
+    {
+      "id": "260542ea-95fc-4eb1-bb38-13c6d746bf74",
+      "name": "cek_transaksi",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        180,
+        640
+      ],
+      "parameters": {
+        "toolDescription": "Lihat riwayat transaksi GoPay pengguna (top up, pembayaran, transfer) lengkap dengan status sistem & keterangan internal. Gunakan SEBELUM menjawab keluhan saldo/top up/transaksi.",
+        "method": "POST",
+        "url": "http://localhost:3000/api/tools/cek_transaksi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"user_id\": \"{{ $('Normalisasi Pesan').item.json.userId }}\",\n  \"jenis\": {{ JSON.stringify($fromAI('jenis', 'Filter jenis transaksi (pilihan: TOPUP/PEMBAYARAN/TRANSFER_KELUAR/SEMUA) - opsional', 'string', '')) }},\n  \"transaksi_id\": {{ JSON.stringify($fromAI('transaksi_id', 'Opsional, ID transaksi spesifik - opsional', 'string', '')) }}\n}",
+        "options": {}
+      }
+    },
+    {
+      "id": "b8c153df-df19-46ec-9c45-d1df6eb9b0b4",
+      "name": "cek_pesanan",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        380,
+        640
+      ],
+      "parameters": {
+        "toolDescription": "Lihat pesanan pengguna (GoRide/GoCar/GoFood/GoSend) beserta driver, merchant, rincian tarif, log & flag sistem, dan analisis keterlambatan otomatis. Tanpa order_id = semua pesanan terbaru.",
+        "method": "POST",
+        "url": "http://localhost:3000/api/tools/cek_pesanan",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"user_id\": \"{{ $('Normalisasi Pesan').item.json.userId }}\",\n  \"order_id\": {{ JSON.stringify($fromAI('order_id', 'order_id - opsional', 'string', '')) }},\n  \"layanan\": {{ JSON.stringify($fromAI('layanan', 'layanan (pilihan: GoRide/GoCar/GoFood/GoSend/SEMUA) - opsional', 'string', '')) }}\n}",
+        "options": {}
+      }
+    },
+    {
+      "id": "3c19e908-c151-42b2-a176-ef0970fd6ca9",
+      "name": "cari_sop",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        580,
+        640
+      ],
+      "parameters": {
+        "toolDescription": "Cari SOP/panduan penanganan kasus di knowledge base (prioritas, SLA, langkah, kompensasi, larangan). Pakai untuk memastikan penanganan sesuai kebijakan.",
+        "method": "POST",
+        "url": "http://localhost:3000/api/tools/cari_sop",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"kata_kunci\": {{ JSON.stringify($fromAI('kata_kunci', 'kata_kunci', 'string')) }}\n}",
+        "options": {}
+      }
+    },
+    {
+      "id": "37d3ec2e-b449-4639-a614-3795a7ffcad2",
+      "name": "rekonsiliasi_topup",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        780,
+        640
+      ],
+      "parameters": {
+        "toolDescription": "Paksa sinkronisasi top up yang dananya SUDAH diterima bank tapi belum masuk saldo (status DANA_DITERIMA_BANK). Saldo langsung dikreditkan. Untuk status GAGAL_DEBIT_TERPOTONG akan mengajukan pengembalian dana ke bank. Untuk DUPLIKAT_TERDETEKSI akan mengembalikan dana duplikat ke saldo GoPay.",
+        "method": "POST",
+        "url": "http://localhost:3000/api/tools/rekonsiliasi_topup",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"user_id\": \"{{ $('Normalisasi Pesan').item.json.userId }}\",\n  \"transaksi_id\": {{ JSON.stringify($fromAI('transaksi_id', 'transaksi_id', 'string')) }}\n}",
+        "options": {}
+      }
+    },
+    {
+      "id": "d358908a-dd7c-420a-b601-17155d037811",
+      "name": "proses_refund",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        980,
+        640
+      ],
+      "parameters": {
+        "toolDescription": "Kembalikan dana ke saldo GoPay (instan) atau ke sumber dana. Otomatis jika nominal <= batas AI (Rp100.000); di atas itu status MENUNGGU_PERSETUJUAN dan wajib eskalasi.",
+        "method": "POST",
+        "url": "http://localhost:3000/api/tools/proses_refund",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"user_id\": \"{{ $('Normalisasi Pesan').item.json.userId }}\",\n  \"nominal\": {{ $fromAI('nominal', 'nominal', 'number') }},\n  \"alasan\": {{ JSON.stringify($fromAI('alasan', 'alasan', 'string')) }},\n  \"order_id\": {{ JSON.stringify($fromAI('order_id', 'order_id - opsional', 'string', '')) }},\n  \"transaksi_id\": {{ JSON.stringify($fromAI('transaksi_id', 'transaksi_id - opsional', 'string', '')) }},\n  \"tujuan\": {{ JSON.stringify($fromAI('tujuan', 'tujuan (pilihan: GOPAY/SUMBER_DANA) - opsional', 'string', '')) }}\n}",
+        "options": {}
+      }
+    },
+    {
+      "id": "d1648ed9-370c-4bb0-aee8-61d42f5a13c2",
+      "name": "beri_voucher",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        1180,
+        640
+      ],
+      "parameters": {
+        "toolDescription": "Berikan voucher kompensasi/permintaan maaf (maks Rp25.000) sesuai kebijakan kompensasi.",
+        "method": "POST",
+        "url": "http://localhost:3000/api/tools/beri_voucher",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"user_id\": \"{{ $('Normalisasi Pesan').item.json.userId }}\",\n  \"nominal\": {{ $fromAI('nominal', 'nominal', 'number') }},\n  \"alasan\": {{ JSON.stringify($fromAI('alasan', 'alasan', 'string')) }},\n  \"layanan\": {{ JSON.stringify($fromAI('layanan', 'GoFood/GoRide/GoCar/Semua - opsional', 'string', '')) }}\n}",
+        "options": {}
+      }
+    },
+    {
+      "id": "293e3be6-07e4-4c83-953e-ee8e259acb75",
+      "name": "batalkan_pesanan",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        1380,
+        640
+      ],
+      "parameters": {
+        "toolDescription": "Batalkan pesanan yang belum selesai dan refund penuh ke saldo GoPay secara instan. Gunakan hanya setelah pengguna setuju membatalkan.",
+        "method": "POST",
+        "url": "http://localhost:3000/api/tools/batalkan_pesanan",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"user_id\": \"{{ $('Normalisasi Pesan').item.json.userId }}\",\n  \"order_id\": {{ JSON.stringify($fromAI('order_id', 'order_id', 'string')) }},\n  \"alasan\": {{ JSON.stringify($fromAI('alasan', 'alasan', 'string')) }}\n}",
+        "options": {}
+      }
+    },
+    {
+      "id": "8b6fc4fa-f74a-4376-ab4a-69c73e682d45",
+      "name": "ganti_dana_mitra",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        -20,
+        840
+      ],
+      "parameters": {
+        "toolDescription": "Ganti dana talangan mitra driver akibat order fiktif. Otomatis jika indikasi fraud >= 2 dan nominal <= Rp300.000. Akun pemesan fiktif ikut diblokir dan performa mitra dipulihkan.",
+        "method": "POST",
+        "url": "http://localhost:3000/api/tools/ganti_dana_mitra",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"user_id\": \"{{ $('Normalisasi Pesan').item.json.userId }}\",\n  \"order_id\": {{ JSON.stringify($fromAI('order_id', 'order_id', 'string')) }}\n}",
+        "options": {}
+      }
+    },
+    {
+      "id": "18c8cb8e-849d-48dd-bf22-653782831fa9",
+      "name": "amankan_akun",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        180,
+        840
+      ],
+      "parameters": {
+        "toolDescription": "DARURAT keamanan: bekukan transaksi keluar GoPay, keluarkan semua perangkat asing, dan tahan transaksi yang masih DIPROSES. Gunakan segera jika ada indikasi akun diretas / OTP bocor.",
+        "method": "POST",
+        "url": "http://localhost:3000/api/tools/amankan_akun",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"user_id\": \"{{ $('Normalisasi Pesan').item.json.userId }}\",\n  \"alasan\": {{ JSON.stringify($fromAI('alasan', 'alasan - opsional', 'string', '')) }}\n}",
+        "options": {}
+      }
+    },
+    {
+      "id": "6c7aad8c-355f-449e-b5af-3901fd40765f",
+      "name": "laporkan_mitra",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        380,
+        840
+      ],
+      "parameters": {
+        "toolDescription": "Laporkan pelanggaran mitra driver. RINGAN=catatan, SEDANG=peringatan + pengguna tidak dipertemukan lagi, BERAT=akun mitra dinonaktifkan sementara selama investigasi (pelecehan, kekerasan, pencurian).",
+        "method": "POST",
+        "url": "http://localhost:3000/api/tools/laporkan_mitra",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"driver_id\": {{ JSON.stringify($fromAI('driver_id', 'driver_id', 'string')) }},\n  \"order_id\": {{ JSON.stringify($fromAI('order_id', 'order_id - opsional', 'string', '')) }},\n  \"user_id\": \"{{ $('Normalisasi Pesan').item.json.userId }}\",\n  \"kategori\": {{ JSON.stringify($fromAI('kategori', 'kategori', 'string')) }},\n  \"tingkat\": {{ JSON.stringify($fromAI('tingkat', 'tingkat (pilihan: RINGAN/SEDANG/BERAT)', 'string')) }},\n  \"kronologi\": {{ JSON.stringify($fromAI('kronologi', 'kronologi', 'string')) }}\n}",
+        "options": {}
+      }
+    },
+    {
+      "id": "0a5c2d1e-48a7-40b9-bf5e-3900517a9810",
+      "name": "info_darurat",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        580,
+        840
+      ],
+      "parameters": {
+        "toolDescription": "Aktifkan protokol keselamatan: kirim notifikasi ke Unit Safety 24 jam dan berikan nomor darurat. Gunakan untuk pelecehan, ancaman, kecelakaan.",
+        "method": "POST",
+        "url": "http://localhost:3000/api/tools/info_darurat",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"user_id\": \"{{ $('Normalisasi Pesan').item.json.userId }}\",\n  \"jenis\": {{ JSON.stringify($fromAI('jenis', 'jenis', 'string')) }},\n  \"masih_dalam_bahaya\": {{ $fromAI('masih_dalam_bahaya', 'masih_dalam_bahaya - opsional', 'boolean', false) }}\n}",
+        "options": {}
+      }
+    },
+    {
+      "id": "9d3d6356-362a-4941-8cd9-12c08588a155",
+      "name": "hubungi_merchant",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        780,
+        840
+      ],
+      "parameters": {
+        "toolDescription": "Kirim ping ke merchant/resto untuk pesanan tertentu dan minta estimasi siap terbaru. Mengembalikan jawaban resto.",
+        "method": "POST",
+        "url": "http://localhost:3000/api/tools/hubungi_merchant",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"order_id\": {{ JSON.stringify($fromAI('order_id', 'order_id', 'string')) }},\n  \"pesan\": {{ JSON.stringify($fromAI('pesan', 'pesan - opsional', 'string', '')) }}\n}",
+        "options": {}
+      }
+    },
+    {
+      "id": "14a265a3-3667-47bc-9995-b6a0b94970e1",
+      "name": "hubungi_driver",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        980,
+        840
+      ],
+      "parameters": {
+        "toolDescription": "Kirim pesan ke driver lewat saluran internal (nomor asli disamarkan) dan dapatkan balasannya. Untuk cek barang tertinggal, posisi, dll.",
+        "method": "POST",
+        "url": "http://localhost:3000/api/tools/hubungi_driver",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"order_id\": {{ JSON.stringify($fromAI('order_id', 'order_id', 'string')) }},\n  \"pesan\": {{ JSON.stringify($fromAI('pesan', 'pesan', 'string')) }}\n}",
+        "options": {}
+      }
+    },
+    {
+      "id": "d53964c6-23a4-4406-951d-8342fd078b5e",
+      "name": "buat_tiket",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        1180,
+        840
+      ],
+      "parameters": {
+        "toolDescription": "Buat tiket kasus agar tercatat & bisa dilacak. Selalu buat tiket untuk kasus yang ditangani (status SELESAI jika sudah tuntas di chat).",
+        "method": "POST",
+        "url": "http://localhost:3000/api/tools/buat_tiket",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"user_id\": \"{{ $('Normalisasi Pesan').item.json.userId }}\",\n  \"kategori\": {{ JSON.stringify($fromAI('kategori', 'ID kasus dari knowledge base, mis. FOOD_TERLAMBAT', 'string')) }},\n  \"prioritas\": {{ JSON.stringify($fromAI('prioritas', 'prioritas (pilihan: P1/P2/P3/P4) - opsional', 'string', '')) }},\n  \"ringkasan\": {{ JSON.stringify($fromAI('ringkasan', 'ringkasan', 'string')) }},\n  \"order_id\": {{ JSON.stringify($fromAI('order_id', 'order_id - opsional', 'string', '')) }},\n  \"status\": {{ JSON.stringify($fromAI('status', 'status (pilihan: TERBUKA/SELESAI/MENUNGGU_PERSETUJUAN) - opsional', 'string', '')) }}\n}",
+        "options": {}
+      }
+    },
+    {
+      "id": "f5b66c73-f754-4c19-90e1-4a009ec5cdce",
+      "name": "eskalasi_manusia",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        1380,
+        840
+      ],
+      "parameters": {
+        "toolDescription": "Teruskan kasus ke agen manusia/tim spesialis dengan ringkasan lengkap supaya pengguna TIDAK perlu mengulang cerita. Wajib untuk P1, nominal di atas batas AI, atau jika pengguna minta.",
+        "method": "POST",
+        "url": "http://localhost:3000/api/tools/eskalasi_manusia",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"user_id\": \"{{ $('Normalisasi Pesan').item.json.userId }}\",\n  \"tiket_id\": {{ JSON.stringify($fromAI('tiket_id', 'tiket_id - opsional', 'string', '')) }},\n  \"tim\": {{ JSON.stringify($fromAI('tim', 'tim', 'string')) }},\n  \"ringkasan\": {{ JSON.stringify($fromAI('ringkasan', 'ringkasan', 'string')) }}\n}",
+        "options": {}
+      }
+    },
+    {
+      "id": "e078b38c-666f-46b9-8f6a-5f0b4b362d95",
+      "name": "Humanizer",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1700,
+        40
+      ],
+      "parameters": {
+        "jsCode": "// Pecah jawaban jadi beberapa bubble chat + hitung jeda mengetik yang natural\nconst out = String($json.output || '').replace(/\\*\\*(.+?)\\*\\*/g, '$1');\nconst bubbles = out.split(/\\n\\s*\\n/).map(s => s.trim()).filter(Boolean).slice(0, 6)\n  .map(text => ({ text, typing_ms: Math.min(2600, 500 + text.length * 18) }));\nconst ctx = $('Deteksi Emosi & Intent').first().json;\nreturn [{ json: { bubbles, kasus: ctx.kasus, emosi: ctx.emosi, phone: $('Normalisasi Pesan').first().json.phone } }];"
+      }
+    },
+    {
+      "id": "bef785c3-6bd8-4a8d-8334-69617537b79e",
+      "name": "Balas ke Simulator",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1940,
+        -60
+      ],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ bubbles: $json.bubbles, kasus: $json.kasus, emosi: $json.emosi }) }}",
+        "options": {}
+      }
+    },
+    {
+      "id": "625230f9-0e59-4e67-9200-b46ead19738a",
+      "name": "Pecah Bubble",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        1940,
+        160
+      ],
+      "parameters": {
+        "fieldToSplitOut": "bubbles",
+        "include": "selectedOtherFields",
+        "fieldsToInclude": "phone",
+        "options": {}
+      }
+    },
+    {
+      "id": "b2e916cd-a01d-43b8-bbc4-6249b2ed7015",
+      "name": "Jeda Mengetik",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        2160,
+        160
+      ],
+      "parameters": {
+        "amount": "={{ $json.typing_ms / 1000 }}",
+        "unit": "seconds"
+      },
+      "webhookId": "82817729-8a3b-4fb0-8052-516df6113615"
+    },
+    {
+      "id": "ad356580-a3e8-4cde-a6f7-6119eb8999da",
+      "name": "Kirim WA",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2380,
+        160
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "http://localhost:3001/api/sendText",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ chatId: $json.phone + '@c.us', text: $json.text, session: 'default' }) }}",
+        "options": {
+          "timeout": 3000
+        }
+      },
+      "onError": "continueRegularOutput",
+      "notes": "Opsional: butuh gateway WhatsApp (mis. WAHA). Kalau belum ada, node ini dilewati otomatis."
+    }
+  ],
+  "connections": {
+    "Claude Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Agent Nara",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Memori Sesi": {
+      "ai_memory": [
+        [
+          {
+            "node": "Agent Nara",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "cek_profil": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agent Nara",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "cek_transaksi": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agent Nara",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "cek_pesanan": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agent Nara",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "cari_sop": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agent Nara",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "rekonsiliasi_topup": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agent Nara",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "proses_refund": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agent Nara",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "beri_voucher": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agent Nara",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "batalkan_pesanan": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agent Nara",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ganti_dana_mitra": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agent Nara",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "amankan_akun": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agent Nara",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "laporkan_mitra": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agent Nara",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "info_darurat": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agent Nara",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "hubungi_merchant": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agent Nara",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "hubungi_driver": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agent Nara",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "buat_tiket": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agent Nara",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "eskalasi_manusia": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agent Nara",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pesan WA Masuk": {
+      "main": [
+        [
+          {
+            "node": "Send Seen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Seen": {
+      "main": [
+        [
+          {
+            "node": "Start Typing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Start Typing": {
+      "main": [
+        [
+          {
+            "node": "Normalisasi Pesan",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalisasi Pesan": {
+      "main": [
+        [
+          {
+            "node": "Deteksi Emosi & Intent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Deteksi Emosi & Intent": {
+      "main": [
+        [
+          {
+            "node": "Agent Nara",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Agent Nara": {
+      "main": [
+        [
+          {
+            "node": "Humanizer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Humanizer": {
+      "main": [
+        [
+          {
+            "node": "Balas ke Simulator",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Pecah Bubble",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pecah Bubble": {
+      "main": [
+        [
+          {
+            "node": "Jeda Mengetik",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Jeda Mengetik": {
+      "main": [
+        [
+          {
+            "node": "Kirim WA",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": false
+  }
+}
