@@ -1,0 +1,1240 @@
+{
+  "dijalankan": "2026-10-06T12:54:44.430Z",
+  "engine": "offline",
+  "klasifikasi": {
+    "kasus_agent": {
+      "n": 70,
+      "accuracy": 0.8857142857142857,
+      "macro_precision": 0.9314814814814815,
+      "macro_recall": 0.8965277777777777,
+      "macro_f1": 0.9032076719576719,
+      "per": [
+        {
+          "label": "TOPUP_TIDAK_MASUK",
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "support": 5
+        },
+        {
+          "label": "REFUND_BELUM_MASUK",
+          "precision": 0,
+          "recall": 0,
+          "f1": 0,
+          "support": 3
+        },
+        {
+          "label": "AKUN_DIRETAS",
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "support": 5
+        },
+        {
+          "label": "PENIPUAN_OTP",
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "support": 3
+        },
+        {
+          "label": "SALAH_TRANSFER",
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "support": 2
+        },
+        {
+          "label": "FOOD_TERLAMBAT",
+          "precision": 0.5555555555555556,
+          "recall": 1,
+          "f1": 0.7142857142857143,
+          "support": 5
+        },
+        {
+          "label": "FOOD_SALAH_KURANG",
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "support": 4
+        },
+        {
+          "label": "FOOD_RUSAK",
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "support": 3
+        },
+        {
+          "label": "DRIVER_TIDAK_SOPAN",
+          "precision": 1,
+          "recall": 0.6,
+          "f1": 0.7499999999999999,
+          "support": 5
+        },
+        {
+          "label": "PELECEHAN",
+          "precision": 0.8,
+          "recall": 1,
+          "f1": 0.888888888888889,
+          "support": 4
+        },
+        {
+          "label": "KECELAKAAN",
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "support": 2
+        },
+        {
+          "label": "BARANG_TERTINGGAL",
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "support": 3
+        },
+        {
+          "label": "PENCURIAN_PAKET_HILANG",
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "support": 4
+        },
+        {
+          "label": "ORDER_FIKTIF",
+          "precision": 1,
+          "recall": 0.75,
+          "f1": 0.8571428571428571,
+          "support": 4
+        },
+        {
+          "label": "TARIF_TIDAK_SESUAI",
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "support": 3
+        },
+        {
+          "label": "DRIVER_MINTA_TAMBAHAN",
+          "precision": 1,
+          "recall": 0.6666666666666666,
+          "f1": 0.8,
+          "support": 3
+        },
+        {
+          "label": "PROMO_TIDAK_BISA",
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "support": 2
+        },
+        {
+          "label": "AKUN_TERBLOKIR",
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "support": 2
+        },
+        {
+          "label": "MINTA_MANUSIA",
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "support": 2
+        },
+        {
+          "label": "SAPAAN",
+          "precision": 1,
+          "recall": 0.5,
+          "f1": 0.6666666666666666,
+          "support": 2
+        },
+        {
+          "label": "TERIMA_KASIH",
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "support": 1
+        },
+        {
+          "label": "BERCANDA",
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "support": 1
+        },
+        {
+          "label": "CURHAT",
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "support": 1
+        },
+        {
+          "label": "SIAPA_KAMU",
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "support": 1
+        }
+      ]
+    },
+    "kasus_baseline": {
+      "n": 70,
+      "accuracy": 0.38571428571428573,
+      "macro_precision": 0.7604166666666666,
+      "macro_recall": 0.4076388888888889,
+      "macro_f1": 0.4958333333333333,
+      "per": [
+        {
+          "label": "TOPUP_TIDAK_MASUK",
+          "precision": 1,
+          "recall": 0.4,
+          "f1": 0.5714285714285715,
+          "support": 5
+        },
+        {
+          "label": "REFUND_BELUM_MASUK",
+          "precision": 1,
+          "recall": 0.3333333333333333,
+          "f1": 0.5,
+          "support": 3
+        },
+        {
+          "label": "AKUN_DIRETAS",
+          "precision": 1,
+          "recall": 0.4,
+          "f1": 0.5714285714285715,
+          "support": 5
+        },
+        {
+          "label": "PENIPUAN_OTP",
+          "precision": 1,
+          "recall": 0.6666666666666666,
+          "f1": 0.8,
+          "support": 3
+        },
+        {
+          "label": "SALAH_TRANSFER",
+          "precision": 1,
+          "recall": 0.5,
+          "f1": 0.6666666666666666,
+          "support": 2
+        },
+        {
+          "label": "FOOD_TERLAMBAT",
+          "precision": 1,
+          "recall": 0.2,
+          "f1": 0.33333333333333337,
+          "support": 5
+        },
+        {
+          "label": "FOOD_SALAH_KURANG",
+          "precision": 0.5,
+          "recall": 0.25,
+          "f1": 0.3333333333333333,
+          "support": 4
+        },
+        {
+          "label": "FOOD_RUSAK",
+          "precision": 1,
+          "recall": 0.6666666666666666,
+          "f1": 0.8,
+          "support": 3
+        },
+        {
+          "label": "DRIVER_TIDAK_SOPAN",
+          "precision": 1,
+          "recall": 0.2,
+          "f1": 0.33333333333333337,
+          "support": 5
+        },
+        {
+          "label": "PELECEHAN",
+          "precision": 0,
+          "recall": 0,
+          "f1": 0,
+          "support": 4
+        },
+        {
+          "label": "KECELAKAAN",
+          "precision": 0,
+          "recall": 0,
+          "f1": 0,
+          "support": 2
+        },
+        {
+          "label": "BARANG_TERTINGGAL",
+          "precision": 0.75,
+          "recall": 1,
+          "f1": 0.8571428571428571,
+          "support": 3
+        },
+        {
+          "label": "PENCURIAN_PAKET_HILANG",
+          "precision": 1,
+          "recall": 0.25,
+          "f1": 0.4,
+          "support": 4
+        },
+        {
+          "label": "ORDER_FIKTIF",
+          "precision": 1,
+          "recall": 0.25,
+          "f1": 0.4,
+          "support": 4
+        },
+        {
+          "label": "TARIF_TIDAK_SESUAI",
+          "precision": 1,
+          "recall": 0.3333333333333333,
+          "f1": 0.5,
+          "support": 3
+        },
+        {
+          "label": "DRIVER_MINTA_TAMBAHAN",
+          "precision": 1,
+          "recall": 0.3333333333333333,
+          "f1": 0.5,
+          "support": 3
+        },
+        {
+          "label": "PROMO_TIDAK_BISA",
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "support": 2
+        },
+        {
+          "label": "AKUN_TERBLOKIR",
+          "precision": 1,
+          "recall": 0.5,
+          "f1": 0.6666666666666666,
+          "support": 2
+        },
+        {
+          "label": "MINTA_MANUSIA",
+          "precision": 1,
+          "recall": 0.5,
+          "f1": 0.6666666666666666,
+          "support": 2
+        },
+        {
+          "label": "SAPAAN",
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "support": 2
+        },
+        {
+          "label": "TERIMA_KASIH",
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "support": 1
+        },
+        {
+          "label": "BERCANDA",
+          "precision": 0,
+          "recall": 0,
+          "f1": 0,
+          "support": 1
+        },
+        {
+          "label": "CURHAT",
+          "precision": 0,
+          "recall": 0,
+          "f1": 0,
+          "support": 1
+        },
+        {
+          "label": "SIAPA_KAMU",
+          "precision": 0,
+          "recall": 0,
+          "f1": 0,
+          "support": 1
+        }
+      ]
+    },
+    "emosi_agent": {
+      "n": 70,
+      "accuracy": 0.9142857142857143,
+      "macro_precision": 0.9047619047619048,
+      "macro_recall": 0.8104938271604937,
+      "macro_f1": 0.8368686868686869,
+      "per": [
+        {
+          "label": "netral",
+          "precision": 0.9285714285714286,
+          "recall": 0.9629629629629629,
+          "f1": 0.9454545454545454,
+          "support": 54
+        },
+        {
+          "label": "marah",
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "support": 3
+        },
+        {
+          "label": "panik",
+          "precision": 0.8333333333333334,
+          "recall": 1,
+          "f1": 0.9090909090909091,
+          "support": 5
+        },
+        {
+          "label": "darurat",
+          "precision": 0.6666666666666666,
+          "recall": 0.4,
+          "f1": 0.5,
+          "support": 5
+        },
+        {
+          "label": "sedih",
+          "precision": 1,
+          "recall": 0.5,
+          "f1": 0.6666666666666666,
+          "support": 2
+        },
+        {
+          "label": "santai",
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "support": 1
+        }
+      ]
+    },
+    "salah_klasifikasi_agent": [
+      {
+        "teks": "rekening kepotong tapi saldo gopay nggak masuk, gimana ini",
+        "kasus": "TOPUP_TIDAK_MASUK",
+        "emosi": "netral",
+        "prediksi": "TOPUP_TIDAK_MASUK",
+        "prediksi_emosi": "panik"
+      },
+      {
+        "teks": "refund pesanan yang kemarin dibatalin belum aku terima",
+        "kasus": "REFUND_BELUM_MASUK",
+        "emosi": "netral",
+        "prediksi": "FOOD_TERLAMBAT",
+        "prediksi_emosi": "netral"
+      },
+      {
+        "teks": "pengembalian dana order batal kok lama banget ya",
+        "kasus": "REFUND_BELUM_MASUK",
+        "emosi": "netral",
+        "prediksi": "FOOD_TERLAMBAT",
+        "prediksi_emosi": "netral"
+      },
+      {
+        "teks": "uang aku belum balik padahal pesanannya dibatalkan resto",
+        "kasus": "REFUND_BELUM_MASUK",
+        "emosi": "netral",
+        "prediksi": "FOOD_TERLAMBAT",
+        "prediksi_emosi": "netral"
+      },
+      {
+        "teks": "kak tolong aku salah kirim gopay 100rb ke nomor yang salah",
+        "kasus": "SALAH_TRANSFER",
+        "emosi": "netral",
+        "prediksi": "SALAH_TRANSFER",
+        "prediksi_emosi": "darurat"
+      },
+      {
+        "teks": "abangnya ngerokok sambil bawa motor, asapnya kena aku",
+        "kasus": "DRIVER_TIDAK_SOPAN",
+        "emosi": "netral",
+        "prediksi": null,
+        "prediksi_emosi": "netral"
+      },
+      {
+        "teks": "bapaknya ugal-ugalan bikin aku takut jatuh",
+        "kasus": "DRIVER_TIDAK_SOPAN",
+        "emosi": "netral",
+        "prediksi": "PELECEHAN",
+        "prediksi_emosi": "netral"
+      },
+      {
+        "teks": "drivernya pegang-pegang paha aku di mobil",
+        "kasus": "PELECEHAN",
+        "emosi": "darurat",
+        "prediksi": "PELECEHAN",
+        "prediksi_emosi": "netral"
+      },
+      {
+        "teks": "aku jatuh dari motor goride, kaki aku luka",
+        "kasus": "KECELAKAAN",
+        "emosi": "darurat",
+        "prediksi": "KECELAKAAN",
+        "prediksi_emosi": "netral"
+      },
+      {
+        "teks": "mobil gocar yang aku naikin tabrakan",
+        "kasus": "KECELAKAAN",
+        "emosi": "darurat",
+        "prediksi": "KECELAKAAN",
+        "prediksi_emosi": "netral"
+      },
+      {
+        "teks": "min saya kena orderan fiktif, alamatnya palsu",
+        "kasus": "ORDER_FIKTIF",
+        "emosi": "netral",
+        "prediksi": "FOOD_TERLAMBAT",
+        "prediksi_emosi": "netral"
+      },
+      {
+        "teks": "order bodong lagi min, capek saya",
+        "kasus": "ORDER_FIKTIF",
+        "emosi": "sedih",
+        "prediksi": "ORDER_FIKTIF",
+        "prediksi_emosi": "netral"
+      },
+      {
+        "teks": "drivernya minta uang tambahan 10rb",
+        "kasus": "DRIVER_MINTA_TAMBAHAN",
+        "emosi": "netral",
+        "prediksi": null,
+        "prediksi_emosi": "netral"
+      },
+      {
+        "teks": "selamat pagi min",
+        "kasus": "SAPAAN",
+        "emosi": "netral",
+        "prediksi": null,
+        "prediksi_emosi": "netral"
+      }
+    ]
+  },
+  "skenario": {
+    "agent": {
+      "skenario": 22,
+      "tingkat_penyelesaian": 0.9545454545454546,
+      "pemenuhan_aksi_sop": 0.9333333333333333,
+      "info_spesifik": 0.9545454545454546,
+      "tingkat_pengalihan": 0,
+      "eskalasi_p1_tepat": 1,
+      "rata_latensi_ms": 21.5
+    },
+    "baseline": {
+      "skenario": 22,
+      "tingkat_penyelesaian": 0,
+      "pemenuhan_aksi_sop": 0,
+      "info_spesifik": 0,
+      "tingkat_pengalihan": 1,
+      "eskalasi_p1_tepat": 0,
+      "rata_latensi_ms": 0
+    },
+    "detail_agent": [
+      {
+        "id": "S01",
+        "kasus": "TOPUP_TIDAK_MASUK",
+        "prioritas": "P2",
+        "giliran": 1,
+        "tuntas": true,
+        "aksi_terpenuhi": 1,
+        "aksi_dibutuhkan": 1,
+        "tools": [
+          "cek_transaksi",
+          "rekonsiliasi_topup",
+          "buat_tiket"
+        ],
+        "info_spesifik": true,
+        "dialihkan": false,
+        "eskalasi_p1": null,
+        "latensi_ms": 141
+      },
+      {
+        "id": "S02",
+        "kasus": "TOPUP_TIDAK_MASUK",
+        "prioritas": "P2",
+        "giliran": 2,
+        "tuntas": true,
+        "aksi_terpenuhi": 1,
+        "aksi_dibutuhkan": 1,
+        "tools": [
+          "cek_transaksi",
+          "rekonsiliasi_topup",
+          "proses_refund",
+          "buat_tiket"
+        ],
+        "info_spesifik": true,
+        "dialihkan": false,
+        "eskalasi_p1": null,
+        "latensi_ms": 21
+      },
+      {
+        "id": "S03",
+        "kasus": "TOPUP_TIDAK_MASUK",
+        "prioritas": "P2",
+        "giliran": 2,
+        "tuntas": true,
+        "aksi_terpenuhi": 1,
+        "aksi_dibutuhkan": 1,
+        "tools": [
+          "cek_transaksi",
+          "rekonsiliasi_topup",
+          "buat_tiket"
+        ],
+        "info_spesifik": true,
+        "dialihkan": false,
+        "eskalasi_p1": null,
+        "latensi_ms": 19
+      },
+      {
+        "id": "S04",
+        "kasus": "AKUN_DIRETAS",
+        "prioritas": "P1",
+        "giliran": 1,
+        "tuntas": true,
+        "aksi_terpenuhi": 2,
+        "aksi_dibutuhkan": 2,
+        "tools": [
+          "amankan_akun",
+          "buat_tiket",
+          "eskalasi_manusia"
+        ],
+        "info_spesifik": true,
+        "dialihkan": false,
+        "eskalasi_p1": true,
+        "latensi_ms": 22
+      },
+      {
+        "id": "S05",
+        "kasus": "PENIPUAN_OTP",
+        "prioritas": "P2",
+        "giliran": 2,
+        "tuntas": true,
+        "aksi_terpenuhi": 1,
+        "aksi_dibutuhkan": 1,
+        "tools": [
+          "amankan_akun",
+          "buat_tiket",
+          "eskalasi_manusia"
+        ],
+        "info_spesifik": true,
+        "dialihkan": false,
+        "eskalasi_p1": null,
+        "latensi_ms": 21
+      },
+      {
+        "id": "S06",
+        "kasus": "FOOD_TERLAMBAT",
+        "prioritas": "P3",
+        "giliran": 2,
+        "tuntas": true,
+        "aksi_terpenuhi": 2,
+        "aksi_dibutuhkan": 2,
+        "tools": [
+          "cek_pesanan",
+          "hubungi_merchant",
+          "batalkan_pesanan",
+          "buat_tiket"
+        ],
+        "info_spesifik": true,
+        "dialihkan": false,
+        "eskalasi_p1": null,
+        "latensi_ms": 23
+      },
+      {
+        "id": "S07",
+        "kasus": "FOOD_TERLAMBAT",
+        "prioritas": "P3",
+        "giliran": 2,
+        "tuntas": true,
+        "aksi_terpenuhi": 2,
+        "aksi_dibutuhkan": 2,
+        "tools": [
+          "cek_pesanan",
+          "hubungi_merchant",
+          "beri_voucher",
+          "buat_tiket"
+        ],
+        "info_spesifik": true,
+        "dialihkan": false,
+        "eskalasi_p1": null,
+        "latensi_ms": 20
+      },
+      {
+        "id": "S08",
+        "kasus": "FOOD_SALAH_KURANG",
+        "prioritas": "P3",
+        "giliran": 1,
+        "tuntas": true,
+        "aksi_terpenuhi": 1,
+        "aksi_dibutuhkan": 1,
+        "tools": [
+          "cek_pesanan",
+          "proses_refund",
+          "beri_voucher",
+          "buat_tiket"
+        ],
+        "info_spesifik": true,
+        "dialihkan": false,
+        "eskalasi_p1": null,
+        "latensi_ms": 23
+      },
+      {
+        "id": "S09",
+        "kasus": "FOOD_SALAH_KURANG",
+        "prioritas": "P3",
+        "giliran": 2,
+        "tuntas": true,
+        "aksi_terpenuhi": 1,
+        "aksi_dibutuhkan": 1,
+        "tools": [
+          "cek_pesanan",
+          "proses_refund",
+          "beri_voucher",
+          "buat_tiket"
+        ],
+        "info_spesifik": true,
+        "dialihkan": false,
+        "eskalasi_p1": null,
+        "latensi_ms": 20
+      },
+      {
+        "id": "S10",
+        "kasus": "FOOD_RUSAK",
+        "prioritas": "P3",
+        "giliran": 1,
+        "tuntas": true,
+        "aksi_terpenuhi": 1,
+        "aksi_dibutuhkan": 1,
+        "tools": [
+          "cek_pesanan",
+          "proses_refund",
+          "beri_voucher",
+          "buat_tiket"
+        ],
+        "info_spesifik": true,
+        "dialihkan": false,
+        "eskalasi_p1": null,
+        "latensi_ms": 26
+      },
+      {
+        "id": "S11",
+        "kasus": "DRIVER_TIDAK_SOPAN",
+        "prioritas": "P3",
+        "giliran": 2,
+        "tuntas": true,
+        "aksi_terpenuhi": 1,
+        "aksi_dibutuhkan": 1,
+        "tools": [
+          "cek_pesanan",
+          "laporkan_mitra",
+          "beri_voucher",
+          "buat_tiket"
+        ],
+        "info_spesifik": true,
+        "dialihkan": false,
+        "eskalasi_p1": null,
+        "latensi_ms": 32
+      },
+      {
+        "id": "S12",
+        "kasus": "PELECEHAN",
+        "prioritas": "P1",
+        "giliran": 2,
+        "tuntas": true,
+        "aksi_terpenuhi": 3,
+        "aksi_dibutuhkan": 3,
+        "tools": [
+          "info_darurat",
+          "cek_pesanan",
+          "laporkan_mitra",
+          "buat_tiket",
+          "eskalasi_manusia"
+        ],
+        "info_spesifik": true,
+        "dialihkan": false,
+        "eskalasi_p1": true,
+        "latensi_ms": 28
+      },
+      {
+        "id": "S13",
+        "kasus": "KECELAKAAN",
+        "prioritas": "P1",
+        "giliran": 1,
+        "tuntas": true,
+        "aksi_terpenuhi": 2,
+        "aksi_dibutuhkan": 2,
+        "tools": [
+          "info_darurat",
+          "buat_tiket",
+          "eskalasi_manusia"
+        ],
+        "info_spesifik": true,
+        "dialihkan": false,
+        "eskalasi_p1": true,
+        "latensi_ms": 19
+      },
+      {
+        "id": "S14",
+        "kasus": "BARANG_TERTINGGAL",
+        "prioritas": "P3",
+        "giliran": 2,
+        "tuntas": true,
+        "aksi_terpenuhi": 1,
+        "aksi_dibutuhkan": 1,
+        "tools": [
+          "cek_pesanan",
+          "hubungi_driver",
+          "buat_tiket"
+        ],
+        "info_spesifik": true,
+        "dialihkan": false,
+        "eskalasi_p1": null,
+        "latensi_ms": 16
+      },
+      {
+        "id": "S15",
+        "kasus": "PENCURIAN_PAKET_HILANG",
+        "prioritas": "P1",
+        "giliran": 1,
+        "tuntas": true,
+        "aksi_terpenuhi": 2,
+        "aksi_dibutuhkan": 2,
+        "tools": [
+          "cek_pesanan",
+          "laporkan_mitra",
+          "buat_tiket",
+          "eskalasi_manusia"
+        ],
+        "info_spesifik": true,
+        "dialihkan": false,
+        "eskalasi_p1": true,
+        "latensi_ms": 8
+      },
+      {
+        "id": "S16",
+        "kasus": "ORDER_FIKTIF",
+        "prioritas": "P2",
+        "giliran": 1,
+        "tuntas": true,
+        "aksi_terpenuhi": 1,
+        "aksi_dibutuhkan": 1,
+        "tools": [
+          "cek_pesanan",
+          "ganti_dana_mitra",
+          "buat_tiket"
+        ],
+        "info_spesifik": true,
+        "dialihkan": false,
+        "eskalasi_p1": null,
+        "latensi_ms": 6
+      },
+      {
+        "id": "S17",
+        "kasus": "TARIF_TIDAK_SESUAI",
+        "prioritas": "P3",
+        "giliran": 1,
+        "tuntas": true,
+        "aksi_terpenuhi": 1,
+        "aksi_dibutuhkan": 1,
+        "tools": [
+          "cek_pesanan",
+          "proses_refund",
+          "laporkan_mitra",
+          "buat_tiket"
+        ],
+        "info_spesifik": true,
+        "dialihkan": false,
+        "eskalasi_p1": null,
+        "latensi_ms": 10
+      },
+      {
+        "id": "S18",
+        "kasus": "DRIVER_MINTA_TAMBAHAN",
+        "prioritas": "P2",
+        "giliran": 1,
+        "tuntas": false,
+        "aksi_terpenuhi": 0,
+        "aksi_dibutuhkan": 2,
+        "tools": [],
+        "info_spesifik": false,
+        "dialihkan": false,
+        "eskalasi_p1": null,
+        "latensi_ms": 1
+      },
+      {
+        "id": "S19",
+        "kasus": "PROMO_TIDAK_BISA",
+        "prioritas": "P4",
+        "giliran": 1,
+        "tuntas": true,
+        "aksi_terpenuhi": 1,
+        "aksi_dibutuhkan": 1,
+        "tools": [
+          "cari_sop",
+          "beri_voucher"
+        ],
+        "info_spesifik": true,
+        "dialihkan": false,
+        "eskalasi_p1": null,
+        "latensi_ms": 4
+      },
+      {
+        "id": "S20",
+        "kasus": "MINTA_MANUSIA",
+        "prioritas": "P3",
+        "giliran": 1,
+        "tuntas": true,
+        "aksi_terpenuhi": 1,
+        "aksi_dibutuhkan": 1,
+        "tools": [
+          "eskalasi_manusia"
+        ],
+        "info_spesifik": true,
+        "dialihkan": false,
+        "eskalasi_p1": null,
+        "latensi_ms": 4
+      },
+      {
+        "id": "S21",
+        "kasus": "SALAH_TRANSFER",
+        "prioritas": "P2",
+        "giliran": 1,
+        "tuntas": true,
+        "aksi_terpenuhi": 1,
+        "aksi_dibutuhkan": 1,
+        "tools": [
+          "buat_tiket"
+        ],
+        "info_spesifik": true,
+        "dialihkan": false,
+        "eskalasi_p1": null,
+        "latensi_ms": 5
+      },
+      {
+        "id": "S22",
+        "kasus": "AKUN_TERBLOKIR",
+        "prioritas": "P2",
+        "giliran": 1,
+        "tuntas": true,
+        "aksi_terpenuhi": 1,
+        "aksi_dibutuhkan": 1,
+        "tools": [
+          "cek_profil",
+          "buat_tiket"
+        ],
+        "info_spesifik": true,
+        "dialihkan": false,
+        "eskalasi_p1": null,
+        "latensi_ms": 4
+      }
+    ],
+    "detail_baseline": [
+      {
+        "id": "S01",
+        "kasus": "TOPUP_TIDAK_MASUK",
+        "prioritas": "P2",
+        "giliran": 1,
+        "tuntas": false,
+        "aksi_terpenuhi": 0,
+        "aksi_dibutuhkan": 1,
+        "tools": [],
+        "info_spesifik": false,
+        "dialihkan": true,
+        "eskalasi_p1": null,
+        "latensi_ms": 0
+      },
+      {
+        "id": "S02",
+        "kasus": "TOPUP_TIDAK_MASUK",
+        "prioritas": "P2",
+        "giliran": 2,
+        "tuntas": false,
+        "aksi_terpenuhi": 0,
+        "aksi_dibutuhkan": 1,
+        "tools": [],
+        "info_spesifik": false,
+        "dialihkan": true,
+        "eskalasi_p1": null,
+        "latensi_ms": 0
+      },
+      {
+        "id": "S03",
+        "kasus": "TOPUP_TIDAK_MASUK",
+        "prioritas": "P2",
+        "giliran": 2,
+        "tuntas": false,
+        "aksi_terpenuhi": 0,
+        "aksi_dibutuhkan": 1,
+        "tools": [],
+        "info_spesifik": false,
+        "dialihkan": true,
+        "eskalasi_p1": null,
+        "latensi_ms": 0
+      },
+      {
+        "id": "S04",
+        "kasus": "AKUN_DIRETAS",
+        "prioritas": "P1",
+        "giliran": 1,
+        "tuntas": false,
+        "aksi_terpenuhi": 0,
+        "aksi_dibutuhkan": 2,
+        "tools": [],
+        "info_spesifik": false,
+        "dialihkan": true,
+        "eskalasi_p1": false,
+        "latensi_ms": 0
+      },
+      {
+        "id": "S05",
+        "kasus": "PENIPUAN_OTP",
+        "prioritas": "P2",
+        "giliran": 2,
+        "tuntas": false,
+        "aksi_terpenuhi": 0,
+        "aksi_dibutuhkan": 1,
+        "tools": [],
+        "info_spesifik": false,
+        "dialihkan": true,
+        "eskalasi_p1": null,
+        "latensi_ms": 0
+      },
+      {
+        "id": "S06",
+        "kasus": "FOOD_TERLAMBAT",
+        "prioritas": "P3",
+        "giliran": 2,
+        "tuntas": false,
+        "aksi_terpenuhi": 0,
+        "aksi_dibutuhkan": 2,
+        "tools": [],
+        "info_spesifik": false,
+        "dialihkan": true,
+        "eskalasi_p1": null,
+        "latensi_ms": 0
+      },
+      {
+        "id": "S07",
+        "kasus": "FOOD_TERLAMBAT",
+        "prioritas": "P3",
+        "giliran": 2,
+        "tuntas": false,
+        "aksi_terpenuhi": 0,
+        "aksi_dibutuhkan": 2,
+        "tools": [],
+        "info_spesifik": false,
+        "dialihkan": true,
+        "eskalasi_p1": null,
+        "latensi_ms": 0
+      },
+      {
+        "id": "S08",
+        "kasus": "FOOD_SALAH_KURANG",
+        "prioritas": "P3",
+        "giliran": 1,
+        "tuntas": false,
+        "aksi_terpenuhi": 0,
+        "aksi_dibutuhkan": 1,
+        "tools": [],
+        "info_spesifik": false,
+        "dialihkan": true,
+        "eskalasi_p1": null,
+        "latensi_ms": 0
+      },
+      {
+        "id": "S09",
+        "kasus": "FOOD_SALAH_KURANG",
+        "prioritas": "P3",
+        "giliran": 2,
+        "tuntas": false,
+        "aksi_terpenuhi": 0,
+        "aksi_dibutuhkan": 1,
+        "tools": [],
+        "info_spesifik": false,
+        "dialihkan": true,
+        "eskalasi_p1": null,
+        "latensi_ms": 0
+      },
+      {
+        "id": "S10",
+        "kasus": "FOOD_RUSAK",
+        "prioritas": "P3",
+        "giliran": 1,
+        "tuntas": false,
+        "aksi_terpenuhi": 0,
+        "aksi_dibutuhkan": 1,
+        "tools": [],
+        "info_spesifik": false,
+        "dialihkan": true,
+        "eskalasi_p1": null,
+        "latensi_ms": 0
+      },
+      {
+        "id": "S11",
+        "kasus": "DRIVER_TIDAK_SOPAN",
+        "prioritas": "P3",
+        "giliran": 2,
+        "tuntas": false,
+        "aksi_terpenuhi": 0,
+        "aksi_dibutuhkan": 1,
+        "tools": [],
+        "info_spesifik": false,
+        "dialihkan": true,
+        "eskalasi_p1": null,
+        "latensi_ms": 0
+      },
+      {
+        "id": "S12",
+        "kasus": "PELECEHAN",
+        "prioritas": "P1",
+        "giliran": 2,
+        "tuntas": false,
+        "aksi_terpenuhi": 0,
+        "aksi_dibutuhkan": 3,
+        "tools": [],
+        "info_spesifik": false,
+        "dialihkan": true,
+        "eskalasi_p1": false,
+        "latensi_ms": 0
+      },
+      {
+        "id": "S13",
+        "kasus": "KECELAKAAN",
+        "prioritas": "P1",
+        "giliran": 1,
+        "tuntas": false,
+        "aksi_terpenuhi": 0,
+        "aksi_dibutuhkan": 2,
+        "tools": [],
+        "info_spesifik": false,
+        "dialihkan": true,
+        "eskalasi_p1": false,
+        "latensi_ms": 0
+      },
+      {
+        "id": "S14",
+        "kasus": "BARANG_TERTINGGAL",
+        "prioritas": "P3",
+        "giliran": 2,
+        "tuntas": false,
+        "aksi_terpenuhi": 0,
+        "aksi_dibutuhkan": 1,
+        "tools": [],
+        "info_spesifik": false,
+        "dialihkan": true,
+        "eskalasi_p1": null,
+        "latensi_ms": 0
+      },
+      {
+        "id": "S15",
+        "kasus": "PENCURIAN_PAKET_HILANG",
+        "prioritas": "P1",
+        "giliran": 1,
+        "tuntas": false,
+        "aksi_terpenuhi": 0,
+        "aksi_dibutuhkan": 2,
+        "tools": [],
+        "info_spesifik": false,
+        "dialihkan": true,
+        "eskalasi_p1": false,
+        "latensi_ms": 0
+      },
+      {
+        "id": "S16",
+        "kasus": "ORDER_FIKTIF",
+        "prioritas": "P2",
+        "giliran": 1,
+        "tuntas": false,
+        "aksi_terpenuhi": 0,
+        "aksi_dibutuhkan": 1,
+        "tools": [],
+        "info_spesifik": false,
+        "dialihkan": true,
+        "eskalasi_p1": null,
+        "latensi_ms": 0
+      },
+      {
+        "id": "S17",
+        "kasus": "TARIF_TIDAK_SESUAI",
+        "prioritas": "P3",
+        "giliran": 1,
+        "tuntas": false,
+        "aksi_terpenuhi": 0,
+        "aksi_dibutuhkan": 1,
+        "tools": [],
+        "info_spesifik": false,
+        "dialihkan": true,
+        "eskalasi_p1": null,
+        "latensi_ms": 0
+      },
+      {
+        "id": "S18",
+        "kasus": "DRIVER_MINTA_TAMBAHAN",
+        "prioritas": "P2",
+        "giliran": 1,
+        "tuntas": false,
+        "aksi_terpenuhi": 0,
+        "aksi_dibutuhkan": 2,
+        "tools": [],
+        "info_spesifik": false,
+        "dialihkan": true,
+        "eskalasi_p1": null,
+        "latensi_ms": 0
+      },
+      {
+        "id": "S19",
+        "kasus": "PROMO_TIDAK_BISA",
+        "prioritas": "P4",
+        "giliran": 1,
+        "tuntas": false,
+        "aksi_terpenuhi": 0,
+        "aksi_dibutuhkan": 1,
+        "tools": [],
+        "info_spesifik": false,
+        "dialihkan": true,
+        "eskalasi_p1": null,
+        "latensi_ms": 0
+      },
+      {
+        "id": "S20",
+        "kasus": "MINTA_MANUSIA",
+        "prioritas": "P3",
+        "giliran": 1,
+        "tuntas": false,
+        "aksi_terpenuhi": 0,
+        "aksi_dibutuhkan": 1,
+        "tools": [],
+        "info_spesifik": false,
+        "dialihkan": true,
+        "eskalasi_p1": null,
+        "latensi_ms": 0
+      },
+      {
+        "id": "S21",
+        "kasus": "SALAH_TRANSFER",
+        "prioritas": "P2",
+        "giliran": 1,
+        "tuntas": false,
+        "aksi_terpenuhi": 0,
+        "aksi_dibutuhkan": 1,
+        "tools": [],
+        "info_spesifik": false,
+        "dialihkan": true,
+        "eskalasi_p1": null,
+        "latensi_ms": 0
+      },
+      {
+        "id": "S22",
+        "kasus": "AKUN_TERBLOKIR",
+        "prioritas": "P2",
+        "giliran": 1,
+        "tuntas": false,
+        "aksi_terpenuhi": 0,
+        "aksi_dibutuhkan": 1,
+        "tools": [],
+        "info_spesifik": false,
+        "dialihkan": true,
+        "eskalasi_p1": null,
+        "latensi_ms": 0
+      }
+    ]
+  }
+}

@@ -1,0 +1,91 @@
+[
+  { "teks": "saldo gopay aku belum nambah padahal udah transfer ke VA dari tadi", "kasus": "TOPUP_TIDAK_MASUK", "emosi": "netral" },
+  { "teks": "kak topup 50 ribu ga masuk masuk, udah sejam nih", "kasus": "TOPUP_TIDAK_MASUK", "emosi": "netral" },
+  { "teks": "PARAH BANGET isi saldo 200rb gak masuk, uang saya hilang??", "kasus": "TOPUP_TIDAK_MASUK", "emosi": "marah" },
+  { "teks": "aku udah top up lewat indomaret tapi saldonya tetap segitu aja", "kasus": "TOPUP_TIDAK_MASUK", "emosi": "netral" },
+  { "teks": "rekening kepotong tapi saldo gopay nggak masuk, gimana ini", "kasus": "TOPUP_TIDAK_MASUK", "emosi": "netral" },
+
+  { "teks": "refund pesanan yang kemarin dibatalin belum aku terima", "kasus": "REFUND_BELUM_MASUK", "emosi": "netral" },
+  { "teks": "pengembalian dana order batal kok lama banget ya", "kasus": "REFUND_BELUM_MASUK", "emosi": "netral" },
+  { "teks": "uang aku belum balik padahal pesanannya dibatalkan resto", "kasus": "REFUND_BELUM_MASUK", "emosi": "netral" },
+
+  { "teks": "ada transaksi transfer 500rb yang bukan saya lakukan", "kasus": "AKUN_DIRETAS", "emosi": "panik" },
+  { "teks": "tolong saldo saya habis tiba tiba, akun saya dibobol", "kasus": "AKUN_DIRETAS", "emosi": "panik" },
+  { "teks": "kok ada login dari hp lain di akun aku, terus saldo berkurang", "kasus": "AKUN_DIRETAS", "emosi": "panik" },
+  { "teks": "akun gopay saya kayaknya dihack", "kasus": "AKUN_DIRETAS", "emosi": "netral" },
+  { "teks": "ada order gofood bukan aku yang pesan, saldo kepotong", "kasus": "AKUN_DIRETAS", "emosi": "panik" },
+
+  { "teks": "barusan ada yang nelpon ngaku dari gojek minta kode otp", "kasus": "PENIPUAN_OTP", "emosi": "netral" },
+  { "teks": "dapet sms katanya menang undian, disuruh klik link", "kasus": "PENIPUAN_OTP", "emosi": "netral" },
+  { "teks": "ada cs palsu minta kode verifikasi aku, itu penipu ya?", "kasus": "PENIPUAN_OTP", "emosi": "netral" },
+
+  { "teks": "aku salah transfer ke nomor orang lain", "kasus": "SALAH_TRANSFER", "emosi": "netral" },
+  { "teks": "kak tolong aku salah kirim gopay 100rb ke nomor yang salah", "kasus": "SALAH_TRANSFER", "emosi": "netral" },
+
+  { "teks": "makanan aku udah 1 jam belum dateng juga", "kasus": "FOOD_TERLAMBAT", "emosi": "netral" },
+  { "teks": "gofood kok lama banget sih, aku udah laper", "kasus": "FOOD_TERLAMBAT", "emosi": "netral" },
+  { "teks": "pesanan bakso aku masih dimasak terus dari tadi", "kasus": "FOOD_TERLAMBAT", "emosi": "netral" },
+  { "teks": "kapan sampai sih pesanan aku, nunggu dari jam 7", "kasus": "FOOD_TERLAMBAT", "emosi": "netral" },
+  { "teks": "kecewa banget, order makanan telat parah", "kasus": "FOOD_TERLAMBAT", "emosi": "marah" },
+
+  { "teks": "es teh aku ga ada di kantong pesanan", "kasus": "FOOD_SALAH_KURANG", "emosi": "netral" },
+  { "teks": "pesanan aku salah menu, aku pesen ayam yang dateng ikan", "kasus": "FOOD_SALAH_KURANG", "emosi": "netral" },
+  { "teks": "tahu crispy nya ketinggalan nggak dimasukin", "kasus": "FOOD_SALAH_KURANG", "emosi": "netral" },
+  { "teks": "pesanan gofood ga lengkap kak", "kasus": "FOOD_SALAH_KURANG", "emosi": "netral" },
+
+  { "teks": "kuahnya tumpah semua di jalan", "kasus": "FOOD_RUSAK", "emosi": "netral" },
+  { "teks": "makanannya basi dan bau, ga bisa dimakan", "kasus": "FOOD_RUSAK", "emosi": "netral" },
+  { "teks": "ada rambut di makanan aku, jijik", "kasus": "FOOD_RUSAK", "emosi": "netral" },
+
+  { "teks": "drivernya kasar banget tadi", "kasus": "DRIVER_TIDAK_SOPAN", "emosi": "netral" },
+  { "teks": "abangnya ngerokok sambil bawa motor, asapnya kena aku", "kasus": "DRIVER_TIDAK_SOPAN", "emosi": "netral" },
+  { "teks": "driver gocar marah marah pas aku minta ac dinyalain", "kasus": "DRIVER_TIDAK_SOPAN", "emosi": "netral" },
+  { "teks": "bapaknya ugal-ugalan bikin aku takut jatuh", "kasus": "DRIVER_TIDAK_SOPAN", "emosi": "netral" },
+  { "teks": "driver jutek banget nyebelin", "kasus": "DRIVER_TIDAK_SOPAN", "emosi": "marah" },
+
+  { "teks": "drivernya pegang-pegang paha aku di mobil", "kasus": "PELECEHAN", "emosi": "darurat" },
+  { "teks": "aku diancam sama driver karena kasih bintang 1", "kasus": "PELECEHAN", "emosi": "darurat" },
+  { "teks": "pintu mobilnya dikunci dan aku dibawa muter muter, aku takut banget", "kasus": "PELECEHAN", "emosi": "darurat" },
+  { "teks": "driver ngomong mesum ke aku sepanjang jalan", "kasus": "PELECEHAN", "emosi": "netral" },
+
+  { "teks": "aku jatuh dari motor goride, kaki aku luka", "kasus": "KECELAKAAN", "emosi": "darurat" },
+  { "teks": "mobil gocar yang aku naikin tabrakan", "kasus": "KECELAKAAN", "emosi": "darurat" },
+
+  { "teks": "hp aku ketinggalan di gocar tadi", "kasus": "BARANG_TERTINGGAL", "emosi": "netral" },
+  { "teks": "dompet aku tertinggal di jok motor driver", "kasus": "BARANG_TERTINGGAL", "emosi": "netral" },
+  { "teks": "payung aku ketinggalan di mobil", "kasus": "BARANG_TERTINGGAL", "emosi": "netral" },
+
+  { "teks": "paket gosend aku nggak sampai padahal statusnya selesai", "kasus": "PENCURIAN_PAKET_HILANG", "emosi": "netral" },
+  { "teks": "barang kiriman aku dicuri drivernya kayaknya", "kasus": "PENCURIAN_PAKET_HILANG", "emosi": "panik" },
+  { "teks": "kiriman hp ke adik aku hilang", "kasus": "PENCURIAN_PAKET_HILANG", "emosi": "netral" },
+  { "teks": "paket belum diterima tapi di aplikasi udah selesai", "kasus": "PENCURIAN_PAKET_HILANG", "emosi": "netral" },
+
+  { "teks": "min saya kena orderan fiktif, alamatnya palsu", "kasus": "ORDER_FIKTIF", "emosi": "netral" },
+  { "teks": "udah nalangin makanan 200rb customernya ngilang", "kasus": "ORDER_FIKTIF", "emosi": "netral" },
+  { "teks": "pemesan ga bisa dihubungi, saya nombok bayar resto", "kasus": "ORDER_FIKTIF", "emosi": "netral" },
+  { "teks": "order bodong lagi min, capek saya", "kasus": "ORDER_FIKTIF", "emosi": "sedih" },
+
+  { "teks": "kok tarif gocar aku jadi lebih mahal dari estimasi awal", "kasus": "TARIF_TIDAK_SESUAI", "emosi": "netral" },
+  { "teks": "aku ditagih lebih dari harga di aplikasi", "kasus": "TARIF_TIDAK_SESUAI", "emosi": "netral" },
+  { "teks": "kenapa ada biaya tambahan di perjalanan aku", "kasus": "TARIF_TIDAK_SESUAI", "emosi": "netral" },
+
+  { "teks": "drivernya minta uang tambahan 10rb", "kasus": "DRIVER_MINTA_TAMBAHAN", "emosi": "netral" },
+  { "teks": "aku disuruh cancel sama driver terus diminta bayar langsung", "kasus": "DRIVER_MINTA_TAMBAHAN", "emosi": "netral" },
+  { "teks": "abangnya minta tips maksa", "kasus": "DRIVER_MINTA_TAMBAHAN", "emosi": "netral" },
+
+  { "teks": "kode promo aku ga bisa dipake", "kasus": "PROMO_TIDAK_BISA", "emosi": "netral" },
+  { "teks": "voucher diskon gofood gagal terus", "kasus": "PROMO_TIDAK_BISA", "emosi": "netral" },
+
+  { "teks": "akun aku terblokir ga bisa login", "kasus": "AKUN_TERBLOKIR", "emosi": "netral" },
+  { "teks": "kenapa gopay aku dibekukan", "kasus": "AKUN_TERBLOKIR", "emosi": "netral" },
+
+  { "teks": "aku mau ngobrol sama manusia aja", "kasus": "MINTA_MANUSIA", "emosi": "netral" },
+  { "teks": "tolong sambungkan ke cs manusia", "kasus": "MINTA_MANUSIA", "emosi": "netral" },
+
+  { "teks": "halo kak", "kasus": "SAPAAN", "emosi": "netral" },
+  { "teks": "selamat pagi min", "kasus": "SAPAAN", "emosi": "netral" },
+  { "teks": "makasih banyak ya kak udah dibantu", "kasus": "TERIMA_KASIH", "emosi": "netral" },
+  { "teks": "wkwkwk", "kasus": "BERCANDA", "emosi": "santai" },
+  { "teks": "lagi capek banget hari ini", "kasus": "CURHAT", "emosi": "sedih" },
+  { "teks": "kamu bot ya?", "kasus": "SIAPA_KAMU", "emosi": "netral" }
+]
