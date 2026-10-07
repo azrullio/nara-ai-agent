@@ -6,7 +6,7 @@ layanan bantuan / customer service, lalu beri label awal otomatis.
 Pemakaian:
     python -m pip install google-play-scraper
     python penelitian/scrape_ulasan.py --jumlah 5000
-    python penelitian/scrape_ulasan.py --pakai-label-manual --folder "D:\folder\studi_pendahuluan"
+    python penelitian/scrape_ulasan.py --pakai-label-manual --folder "D:/folder/studi_pendahuluan"
 
 Hasil (folder penelitian/hasil/):
     ulasan_semua.csv        semua ulasan yang diambil
@@ -81,6 +81,10 @@ def main():
     if a.pakai_label_manual:
         semua = list(csv.DictReader(open(p_semua, encoding="utf-8-sig")))
         cs = list(csv.DictReader(open(p_cs, encoding="utf-8-sig")))
+        terverifikasi = sum(1 for r in cs if r.get("label_manual", "").strip() or r.get("relevan_manual", "").strip())
+        if terverifikasi == 0:
+            print("PERINGATAN: kolom relevan_manual/label_manual di ulasan_cs.csv masih kosong semua. "
+                  "Isi dulu di Excel, simpan, lalu jalankan lagi.", file=sys.stderr)
         for r in cs:
             if r.get("label_manual", "").strip():
                 r["masalah_cs"] = r["label_manual"].strip()
@@ -114,7 +118,7 @@ def main():
           f"- Total ulasan dianalisis: **{n}**",
           f"- Ulasan yang membahas layanan bantuan/CS: **{ncs}** ({pct(ncs, n)})",
           f"- Dari ulasan CS tersebut, bintang 1-2 (negatif): **{negatif}** ({pct(negatif, ncs)})",
-          f"- Label: {'MANUAL (sudah diverifikasi)' if a.pakai_label_manual else 'OTOMATIS berbasis kata kunci (BELUM diverifikasi manual)'}",
+          f"- Label: " + (f"diverifikasi manual pada {terverifikasi} baris, sisanya label otomatis" if a.pakai_label_manual else "OTOMATIS berbasis kata kunci (BELUM diverifikasi manual)"),
           "", "## Jenis masalah layanan CS (satu ulasan bisa >1 label)", "", "| Masalah | Jumlah | % dari ulasan CS |", "|---|---|---|"]
     md += [f"| {k} | {v} | {pct(v, ncs)} |" for k, v in masalah.most_common()]
     md += ["", "## Topik kasus yang dikeluhkan", "", "| Topik | Jumlah | % dari ulasan CS |", "|---|---|---|"]
