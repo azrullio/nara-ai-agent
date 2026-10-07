@@ -14,6 +14,7 @@ from collections import Counter
 
 DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "hasil")
 path = sys.argv[1] if len(sys.argv) > 1 else os.path.join(DIR, "jawaban_kuesioner.csv")
+DIR = os.path.dirname(os.path.abspath(path))  # ringkasan disimpan di folder yang sama dengan file CSV
 rows = list(csv.DictReader(open(path, encoding="utf-8-sig")))
 if not rows:
     sys.exit("File kosong: " + path)

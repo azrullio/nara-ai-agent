@@ -6,6 +6,7 @@ layanan bantuan / customer service, lalu beri label awal otomatis.
 Pemakaian:
     python -m pip install google-play-scraper
     python penelitian/scrape_ulasan.py --jumlah 5000
+    python penelitian/scrape_ulasan.py --pakai-label-manual --folder "D:\folder\studi_pendahuluan"
 
 Hasil (folder penelitian/hasil/):
     ulasan_semua.csv        semua ulasan yang diambil
@@ -65,12 +66,15 @@ def tulis_csv(path, rows, kolom):
         w.writeheader(); w.writerows(rows)
 
 def main():
+    global DIR
     ap = argparse.ArgumentParser()
     ap.add_argument("--app", default="com.gojek.app", help="ID aplikasi di Play Store")
     ap.add_argument("--jumlah", type=int, default=5000)
     ap.add_argument("--lang", default="id"); ap.add_argument("--country", default="id")
     ap.add_argument("--pakai-label-manual", action="store_true", help="hitung ulang ringkasan dari kolom label_manual di ulasan_cs.csv")
+    ap.add_argument("--folder", default=DIR, help="folder tempat file CSV hasil disimpan/dibaca")
     a = ap.parse_args()
+    DIR = a.folder
     os.makedirs(DIR, exist_ok=True)
     p_semua, p_cs = os.path.join(DIR, "ulasan_semua.csv"), os.path.join(DIR, "ulasan_cs.csv")
 
